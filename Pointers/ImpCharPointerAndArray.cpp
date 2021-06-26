@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 int main() {
-  char st[] = "abcd";
+  char st[] = "abc6";
   char c = 'a';
   char * ptr = st;
   int i=0;
@@ -24,7 +24,7 @@ cout << "i+ptr[0]: " << i+ptr[0]<<endl;
     cout << "*(st): " << *(st) <<endl;
 
 
-    cout << "*(st)+i: " << *(st) + i <<endl;
+    cout << "*(st)+0: " << *(st) + 0 <<endl;
 
       cout << "c+i: " << c + i <<endl;
 
@@ -40,8 +40,8 @@ cout << "i+ptr[0]: " << i+ptr[0]<<endl;
 
 
 
-//   for(int i = 0; st[i] != '\0'; i++) {
-//      cout << st[i] << *(st)+i << *(i+st) << i[st];
-//   }
+  for(int fi = 0; st[fi] != '\0'; fi++) {
+     cout << st[fi] << *(st)+fi << *(fi+st) << fi[st];
+  }
   return 0;
 }
