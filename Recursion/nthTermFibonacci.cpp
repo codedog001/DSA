@@ -7,6 +7,7 @@ int fib(int n){
     }else if(n==1){
         return 1;
     }
+    cout<<"n is " << n <<endl;
     return fib(n-1) + fib(n-2);
 }
 int main(){
