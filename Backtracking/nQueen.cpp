@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int a[11][11];
+int a[16][16];
 
 bool ifPossible(int n, int row, int col){
     //Checking for Queen in Upper (row-1) Left (col-1) Diagonal
