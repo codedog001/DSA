@@ -36,13 +36,15 @@ class Fraction {
     // tb hmare function k this keyword f1 ka address a jaega, to bs f2 ko pass krna hoga.
     //Agar ham this nai likhenge to koi difference nai aega, kyuki there is no other variable named numerator or den. in fun.
     //numerator will be interpreted as this-> numerator only (and it will numerator of f1), and for num of f2 we will use f2.numerator and similarly for den.
-
-    void add(Fraction f2){
-        int lcm = denominator * f2.denominator;
+    //Also we want ki f2 should be passed through reference and const because we don't want this function (refTof2) to change value of f2.
+    //refTof2 can only read this value, can't change it.
+    
+    void add(Fraction const& refTof2){
+        int lcm = denominator * refTof2.denominator;
         int x = lcm / denominator;
-        int y = lcm / f2.denominator;
+        int y = lcm / refTof2.denominator;
 
-        int num = (x * numerator) + (y * f2.numerator);
+        int num = (x * numerator) + (y * refTof2.numerator);
 
         numerator = num;
         denominator = lcm;
