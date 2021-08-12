@@ -2,11 +2,37 @@
 using namespace std;
 #include "LinkedList.cpp"
 
+Node* takeInput(){
+    cout << "ENTER -1 TO QUIT" << endl;
+    int data;
+    cin >> data;
+    Node *head = NULL;
+
+    while(data!=-1){
+        // Node h(data); -> wrong method, as soon as scope of while loop ends, the node will get deallocated.
+        Node *n = new Node(data);
+        n->next = NULL;
+
+        if(head == NULL){ //Only enter address in head, if it is NULL.
+            head = n;
+        }
+        else{
+            Node *temp = head;
+            while(temp->next!=NULL){
+                temp = temp->next;
+            }
+            temp-> next = n;
+        }
+        cin >> data;
+    }
+
+    return head;
+}
+
 int main(){
 
     //Statically
 
-    cout << "*** STATICALLY ***" << endl;
 
     Node n1(10);
     Node n2(20);
@@ -21,7 +47,6 @@ int main(){
     
 
     //Dynamically
-    cout << "*** DYNAMICALLY ***" << endl;
     Node *n4 = new Node(60);
     Node *n5 = new Node(70);
     Node *n6 = new Node(80);
@@ -31,8 +56,12 @@ int main(){
     n3.next = n4;
 
 
-    Node::print(head);
+    // Node::print(head);
 
-    cout << &n1 << " " << head << endl;
+    // cout << &n1 << " " << head << endl;
+
+    Node * h1 = takeInput();
+    Node::print(h1);
+
 
 }
