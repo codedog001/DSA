@@ -63,7 +63,7 @@ class Node{
         if(pos==1){
             Node *p = head;
             head = p->next;
-            return head;
+            
         }
         else{
             //1. Deletion of middle node and end node
@@ -72,12 +72,17 @@ class Node{
                 count++;
                 temp = temp -> next;
             }
-            Node *p = temp->next;
+            if(temp == NULL){
+                return head;
+            }
+            if(temp->next!=NULL){
+                Node *p = temp->next;
 
-            temp->next = p->next;
-            delete p;
-            return head;
+                temp->next = p->next;
+                delete p;
+            }
         }
+        return head;
     }
 
     static Node* takeInput(){
