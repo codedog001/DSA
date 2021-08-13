@@ -31,13 +31,12 @@ int main(){
     n3.next = n4;
 
 
-    // Node::print(head);
-
     // cout << &n1 << " " << head << endl;
 
     Node * h1 = Node::takeInput();
-    Node *h2 = Node::insert(h1);
-    Node::print(h2); //Print is a static function.
+    // Node *h2 = Node::insertNode(h1);
+    Node *h3 = Node::deleteNode(h1);
+    Node::print(h3); //Print is a static function.
 
 
 }

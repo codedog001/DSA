@@ -20,9 +20,9 @@ class Node{
         cout << endl;
     }
 
-    static Node * insert(Node * head){
+    static Node * insertNode(Node * head){
 
-        cout << "INSERT at POS" << endl;
+        cout << "INSERT FUNCTION" << endl;
         cout << "Enter the position: " << endl;
         int pos=0,data=0;
         cin>>pos;
@@ -47,6 +47,35 @@ class Node{
             }
             m->next = temp->next;
             temp->next = m;
+            return head;
+        }
+    }
+
+    static Node* deleteNode(Node * head){
+
+        int count = 1;
+        int pos = 0;
+        Node* temp = head;
+        cout << "Enter the position to delete Node from: " << endl;
+        cin >> pos;
+
+        //1. Deletion of first node
+        if(pos==1){
+            Node *p = head;
+            head = p->next;
+            return head;
+        }
+        else{
+            //1. Deletion of middle node and end node
+
+            while(count < pos-1 && temp != NULL){
+                count++;
+                temp = temp -> next;
+            }
+            Node *p = temp->next;
+
+            temp->next = p->next;
+            delete p;
             return head;
         }
     }
