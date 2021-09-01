@@ -8,50 +8,64 @@ class Queue{
     T * arr;
     int capacity;
     int nextIndex;
+    int firstIndex;
+    int size;
 
     public:
     Queue(){
         arr = new T[4];
         capacity = 4;
         nextIndex = 0; 
+        firstIndex = 0;
+        size = 0;
     }
 
-    void shiftEle(){
-        for(int i=1; i<nextIndex; i++){
-            arr[i-1] = arr[i];
-        }
-    }
+    
 
     void enqueue(int ele){
         if(capacity == nextIndex){
-            T * newArr = new T[2*capacity];
-            for(int i=0; i<capacity; i++){
-                newArr[i] = arr[i];
+            nextIndex = 0;
+            if(firstIndex!=0 && nextIndex != firstIndex){
+                arr[nextIndex] = ele;
+                nextIndex++;
+                return;
+            }else if(firstIndex==0){
+                cout << "OVERFLOW" << endl;
+                return;
             }
-            delete[] arr;
-            arr = newArr;
-        }
+        }else{
         arr[nextIndex] = ele;
         nextIndex++;
+        }
+        size++;
+        return;
     }
     void printQueue(){
         cout << "QUEUE ELEMENTS: ";
-        for(int i=0; i<nextIndex; i++){
+        // for(int i=0; i<size; i++){
+        //     cout << arr[i] << " ";
+        // }
+        // cout << endl;
+        for(int i=firstIndex; i<capacity; i++){
             cout << arr[i] << " ";
+        }
+        if(firstIndex!=0){
+            for(int i=0;i<nextIndex;i++){
+                cout << arr[i] << " ";
+            }
         }
         cout << endl;
     }
 
 
     T dequeue(){
-        if(nextIndex ==0){
+        if(size ==0){
             cout << "UNDERFLOW" << endl;
             return 0;
         }
-        T ele = arr[0];
-        shiftEle();
-        printQueue();
-        nextIndex--;
+        T ele = arr[firstIndex];
+        firstIndex++;
+        size--;
         
         return ele;
     }
@@ -61,13 +75,13 @@ class Queue{
             cout << "EMPTY"<<endl;
             return 0;
         }
-        return arr[0];
+        return arr[firstIndex];
     }
 
     
 
-    int size(){
-        return nextIndex;
+    int returnSize(){
+        return size;
     }
 
     bool isEmpty(){
