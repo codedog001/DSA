@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include "stackUsingArray.cpp"
+#include "stackUsingArray.h"
 
 int main(){
     Stack<char> *s = new Stack<char>;
