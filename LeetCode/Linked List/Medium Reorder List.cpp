@@ -1,64 +1,51 @@
-// The idea is to create deep copy of given LL and reverse it. Now we have to pick one element from given LL and next element from reversed LL. Terminate the list at right place. That's it.
+//3 Step solution - Clean code
 
-// Given LL: 1->2->3->4->5
-// Reversed: 5->4->3->2->1
-// Output: 1->5->2->4->3
-
-// Start from head of given LL and terminate it at index 2 (The termination depends on length of LL)
-
-ListNode *reverse(ListNode *head) {
-    if(head == NULL || head -> next == NULL) return head;
-    ListNode * prev = NULL, * curr = head, * n = curr->next;
-    while(curr->next!=NULL){
-        curr->next = prev;
-        prev = curr;
-        curr = n;
-        n = n->next;
+ListNode * findMiddle(ListNode *head){
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast -> next -> next;
+        }
+        return slow;
     }
-    curr->next = prev;
-    return curr;
-}
+    
+    ListNode * reverse(ListNode* head){
+        ListNode * c= head, * p = NULL, * n = head -> next;
+        while(c->next != NULL){
+            c->next = p;
+            p = c;
+            c = n;
+            n = c->next;
+        }
+        c->next = p;
+        return c;
+        
+    }
     void reorderList(ListNode* head) {
-         
-        ListNode *c = head;
-        ListNode *rL = new ListNode(0);
-        ListNode *m = rL;
-        int len = 0;
+        if(!head || !(head->next)) return;
         
-        //1. Create Deep copy of given LL
-        while(c){
-            ListNode *h = new ListNode(c->val);
-            m->next = h;
-            m=m->next;
-            c=c->next;
-            len++;
-        }
-        m->next = NULL;
+        //For E.g: 1->2->3->4->5
         
-        //2. Reverse the duplicate LL
-        ListNode *rH = reverse(rL->next);
+        //1. Find middle of LL -> 3
+        ListNode * mid = findMiddle(head);
         
-        ListNode* r= rH;
-        c=head;
-        ListNode* n= head->next;
-        ListNode* rn = rH->next;
-        int temp =len;
-
-        //3. Starting from head of given LL, take every other element from reversed LL.
-        while(c && c->next && r &&  r->next && temp>(len/2)+1){
-            n=c->next;
-            rn=r->next;  
-            c->next = r;
-            r->next = n;
+        //2. Reverse LL from mid->next // 1->2->3->5->4
+        ListNode* head2 = reverse(mid->next);
+        mid->next = NULL;
+        
+        //3. Create output LL //1->5->2->4->3
+        ListNode *c = head, *rev = head2;
+        
+        while(c && rev){
+            ListNode *n = c->next;
+            ListNode *r = rev->next;
+            
+            c->next = rev;
+            rev->next = n;
+            
             c=n;
-            r=rn;
-            temp--;
+            rev = r;
         }
         
-        //4. Terminate LL at right location depending on its length.
-        if(len%2!=0){
-            c->next  = NULL;
-        }else{
-            c->next->next = NULL;
-        }
     }
