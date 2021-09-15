@@ -4,15 +4,12 @@ vector<int> runningSum(vector<int>& nums) {
     return nums;
 }
 
-//2. Using for loop
+//2. Using a single for loop
 vector<int> runningSum(vector<int>& a) {
-       vector<int> res;
-        if(a.empty()) return res;
-        int sum=0;
-        for(int i=0; i<a.size(); i++){
-            for(int j=0; j<=i; j++) sum += a[j];
-            res.push_back(sum);
-            sum=0;
+        if(a.empty()) return a;
+
+        for(int i=1; i<a.size(); i++){
+            a[i] +=a[i-1];
         }
-        return res;
+        return a;
     }
