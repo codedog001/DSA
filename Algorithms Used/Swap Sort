@@ -1,0 +1,9 @@
+    //Swap Sort - It won't throw error even if arr contains 0.
+    vector<int> restoreString(vector<int>& indices) {
+        for(int i=0;i<indices.size();i++){
+              while(indices[i]!=i){
+                  swap(indices[i],indices[indices[i]]);
+              }
+        }
+        return indices;
+    }   

@@ -1,7 +1,9 @@
+ 
+    
     int *findTwoElement(int *arr, int n) {
         int *res = new int[2];
         int repeating =0, missing = 0;
-        //Swap sort
+        //Swap sort - It won't work if arr contains 0. Because arr[-1] will throw error.
         int i=0;
         while(i<n){
             if(arr[i] != arr[arr[i] -1]){
