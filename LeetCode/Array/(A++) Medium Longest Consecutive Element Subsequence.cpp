@@ -50,3 +50,5 @@ int longestConsecutive(vector<int>& a) {
     }
 T.C- O(n) (inserting elements into hashset) + O(n) (iterating through array) + O(n) (Part A)
 S.C - O(1)
+
+Something I'm not able to understand- First solution does a great job if results from OJ are considered, while second barely misses TLE. If you know why, kindly share in comments.
