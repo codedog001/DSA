@@ -1,16 +1,23 @@
-   int shortestSubarray(vector<int> A, int K) {
-        int N = A.size(), res = N + 1;
-        deque<int> d;
-        for (int i = 0; i < N; i++) {
-            if (i > 0)
-                A[i] += A[i - 1];
-            if (A[i] >= K)
-                res = min(res, i + 1);
-            while (d.size() > 0 && A[i] - A[d.front()] >= K)
-                res = min(res, i - d.front()), d.pop_front();
-            while (d.size() > 0 && A[i] <= A[d.back()])
-                cout << "OK" << endl,  d.pop_back();
-            d.push_back(i);
+int shortestSubarray(vector<int>& arr, int sum) {
+    deque<int> d;
+    int ans = INT_MAX, n = arr.size();
+    
+	for(int i = 1; i<n; i++){
+		arr[i] += arr[i - 1];
+	}
+	
+    for(int i = 0; i<n; i++){
+        if(arr[i] >= sum){
+            ans = min(ans, i+ 1);
         }
-        return res <= N ? res : -1;
+        while(!d.empty() && arr[i] - arr[d.front()] >= sum){
+            ans = min(ans, i - d.front());
+            d.pop_front();
+        }
+        while(!d.empty() && arr[i] <= arr[d.back()]){
+            d.pop_back();
+        }
+        d.push_back(i);
     }
+    return ans == INT_MAX ? -1 : ans;
+}
