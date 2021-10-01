@@ -1,5 +1,25 @@
 1. https://leetcode.com/problems/replace-the-substring-for-balanced-string/
 2. https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/ - Still 0 understanding.
-3. https://leetcode.com/problems/grumpy-bookstore-owner/discuss/1492754/c-sliding-window-logic-explained-in-simple-terms - Difficult Story to understand what to do.
-https://leetcode.com/problems/longest-repeating-character-replacement/ - Very Typical 
+
+//Pick Toys Type
+1. Pick Toys  - Aditya Verma YouTube
+2. Fruits into basket
+//Ends
+
+https://leetcode.com/problems/grumpy-bookstore-owner/discuss/1492754/c-sliding-window-logic-explained-in-simple-terms - Difficult Story to understand what to do.
+
+//Repeating Char type:
+1. https://leetcode.com/problems/longest-repeating-character-replacement/ - Very Typical 
+2. https://leetcode.com/problems/swap-for-longest-repeated-character-substring/
+//Ends
+
+//Trickyish
 https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/
+//Ends
+
+//DQ Used - VVVV IMP.
+1. https://leetcode.com/problems/sliding-window-maximum/
+2. https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/submissions/
+//Ends
+
+
