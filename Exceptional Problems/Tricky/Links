@@ -1,10 +1,12 @@
-https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/discuss/1493185/c-sliding-window-clean-code
-https://leetcode.com/problems/fruit-into-baskets/discuss/1491845/c-sliding-window-with-atmost-2-distinct-elements
-https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
-https://leetcode.com/problems/longest-turbulent-subarray/
-
+//Very Tricky: https://leetcode.com/problems/frequency-of-the-most-frequent-element/
 //Dice Problem: https://leetcode.com/problems/find-missing-observations/
 //String: https://leetcode.com/problems/minimum-moves-to-convert-string/
 
 //Jump Game: https://leetcode.com/problems/jump-game/discuss/1500284/c-simple-solution
 //Repeated DNA Sequences: https://leetcode.com/problems/repeated-dna-sequences/
+
+https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/discuss/1493185/c-sliding-window-clean-code
+https://leetcode.com/problems/fruit-into-baskets/discuss/1491845/c-sliding-window-with-atmost-2-distinct-elements
+https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+https://leetcode.com/problems/longest-turbulent-subarray/
+
