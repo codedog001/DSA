@@ -55,7 +55,7 @@ int countValues(ComponentNode* x) {
     }
     return x->value + sum;
 }
-boolean isLeaf(ComponentNode node) {
+boolean isLeaf(ComponentNode* node) {
     return (node->components.size() == 0);
 }
 boolean isJustAboveLeaf(ComponentNode* node) {
