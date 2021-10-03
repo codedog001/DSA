@@ -1,0 +1,2 @@
+Count of subarray is asked but increases by window size, like: res += j-i+1 => res is not length
+but count of subarrays.
