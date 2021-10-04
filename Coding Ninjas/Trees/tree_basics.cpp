@@ -3,15 +3,77 @@
 using namespace std;
 #include<queue>
 
+
+int countLeafNodes(TreeNode<int>* root){
+    if(root->children.size() == 0) return 1;
+    int count = 0;
+    for(int i=0; i<root->children.size(); i++){
+        count += countLeafNodes(root->children[i]);
+    }
+    return count;
+}
+
+
+void printAtLevelK(TreeNode<int>* node, int k){ 
+    //Base Case
+    if(k==0){
+        cout << node -> data;
+        return;
+    }
+    for(int i=0; i<node->children.size(); i++){
+        printAtLevelK(node->children[i], k-1);
+    }
+}
+
+int getHeight(TreeNode<int>* node) {
+    // Write your code here
+    if (node == NULL) return 0;
+    int ans = 0;
+    for(int i=0; i<node->children.size(); i++){
+        int childHeight = getHeight(node->children[i]);
+        ans = max(childHeight, ans);
+    }
+    return ans+1;
+}
+
+TreeNode<int>* maxDataNode(TreeNode<int>* root) {
+    // Write your code here
+    if(root==NULL) return nullptr;
+    TreeNode<int>* result = root;
+    int maxi = root-> data;
+    for(int i=0; i<root->children.size(); i++){
+        TreeNode<int>* temp = maxDataNode(root->children[i]);
+        if(temp -> data > maxi){
+            maxi= temp->data;
+            result = temp;
+        }
+    }
+    return result;
+}
+
+int sumOfNodes(TreeNode<int>* root) {
+    // Write your code here
+    if(root==NULL) return 0;
+    int sum =root->data;
+    for(int i=0; i<root->children.size(); i++){
+        sum += sumOfNodes(root->children[i]);
+    }
+    return sum;
+}
+
 void printLevelWise(TreeNode<int>* root){
     queue<TreeNode<int>*> pendingNodes;
     pendingNodes.push(root);
 
     while(!pendingNodes.empty()){
         TreeNode<int>* front = pendingNodes.front();
-        cout << front-> data << endl;
+        cout << front-> data << ": ";
         pendingNodes.pop();
 
+        for(int i=0; i<front->children.size(); i++){
+            cout << front->children[i]->data << ",";
+        }
+        cout << endl;
         for(int i=0; i<front->children.size(); i++){
             pendingNodes.push(front->children[i]);
         }
