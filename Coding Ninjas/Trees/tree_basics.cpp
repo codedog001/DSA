@@ -3,6 +3,25 @@
 using namespace std;
 #include<queue>
 
+//Valid Tree (for level wise input): 1 2 2 5 2 3 4 2 6 7 0 0 0 0
+
+void preorderTraversal(TreeNode<int>* root){
+    //Edge Case
+    if(root == NULL) return;
+    cout << root-> data << " ";
+    for(int i=0; i<root->children.size(); i++){
+        preorderTraversal(root->children[i]);
+    }
+}
+
+void postorderTraversal(TreeNode<int>* root){
+    //Edge Case
+    if(root == NULL) return;
+    for(int i=0; i<root->children.size(); i++){
+        postorderTraversal(root->children[i]);
+    }
+    cout << root->data << " ";
+}
 
 int countLeafNodes(TreeNode<int>* root){
     if(root->children.size() == 0) return 1;
@@ -17,7 +36,7 @@ int countLeafNodes(TreeNode<int>* root){
 void printAtLevelK(TreeNode<int>* node, int k){ 
     //Base Case
     if(k==0){
-        cout << node -> data;
+        cout << node -> data << " ";
         return;
     }
     for(int i=0; i<node->children.size(); i++){
@@ -167,5 +186,22 @@ int main(){
 
     TreeNode<int> * root = takeInputLevelWise();
     // printTree(root);
-    printLevelWise(root);
+    // printLevelWise(root);
+    cout << "Preorder Traversal" << endl;
+    preorderTraversal(root);
+     
+    cout << endl;
+    cout << "Postorder Traversal" << endl;
+    postorderTraversal(root);
+
+    cout << endl;
+    cout << "Nodes at level 2" << endl;
+    printAtLevelK(root, 2);
+
+    cout << endl;
+    cout << "Max Data Node: " << maxDataNode(root)->data << endl;
+
+    delete root;
 }
+
+//Valid Tree (for level wise input): 1 2 2 5 2 3 4 2 6 7 0 0 0 0
