@@ -6,6 +6,16 @@ using namespace std;
 
 // Valid binary tree (level wise): 1 2 3 4 -1 5 -1 -1 -1 -1 -1
 
+int countNodes(BinaryTreeNode<int>* root){
+    int ans = 0;
+    if(!root) return 0;
+    int left = countNodes(root->left);
+    int right = countNodes(root->right);
+    return 1+left+right;
+}
+
+
+
 void printTree(BinaryTreeNode<int>* root){
     cout << root -> data << " ";
     if(root->left) printTree( root -> left );
@@ -87,8 +97,12 @@ int main(){
     BinaryTreeNode<int>* c3 = new BinaryTreeNode<int>(4);
     c1->left = c3;
     BinaryTreeNode<int> *r1 = takeInputLevelWise();
+
+    cout << "Level Wise Output: ";
     printLevelWise(r1);
-    
+    cout << endl;
+
+    cout << "No. of nodes: " << countNodes(r1) << endl;
 }
 
 // Valid binary tree (level wise): 1 2 3 4 -1 5 -1 -1 -1 -1 -1

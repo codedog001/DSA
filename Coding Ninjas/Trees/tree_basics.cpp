@@ -5,6 +5,8 @@ using namespace std;
 
 //Valid Tree (for level wise input): 1 2 2 5 2 3 4 2 6 7 0 0 0 0
 
+
+
 void helper(TreeNode<int>* root, int k){
     root->data = k;
     k++;
@@ -173,7 +175,18 @@ void printTree(TreeNode<int>* root){
         printTree(root->children[i]);
     }
 }
+
+int countNodes(TreeNode<int> *root){
+    int ans = 0;
+    if(!root) return 0;
+    for(int i=0; i<root->children.size(); i++){
+        ans = ans + countNodes(root->children[i]);
+    }
+    return ans+1;
+}
+
 int main(){
+
     // TreeNode<int>* root = new TreeNode<int>(1);
 
     // //Children of root
@@ -218,9 +231,11 @@ int main(){
     printLevelWise(root);
     cout << "Replace with depth: " << endl;
 
-    replaceWithDepthValue(root);
+    // replaceWithDepthValue(root);
+    cout << "No. of nodes generic tree: " << countNodes(root) << endl;
     printLevelWise(root);
     delete root;
 }
 
 //Valid Tree (for level wise input): 1 2 2 5 2 3 4 2 6 7 0 0 0 0
+// 1 2 2 5 2 3 4 2 6 7 2 8 9 1 17 0 0 0 0
