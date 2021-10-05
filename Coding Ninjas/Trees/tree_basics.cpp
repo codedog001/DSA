@@ -5,6 +5,19 @@ using namespace std;
 
 //Valid Tree (for level wise input): 1 2 2 5 2 3 4 2 6 7 0 0 0 0
 
+void helper(TreeNode<int>* root, int k){
+    root->data = k;
+    k++;
+    for(int i=0; i<root->children.size();i++){
+        helper(root->children[i], k);
+    }
+}
+
+void replaceWithDepthValue(TreeNode<int>* root) {
+    // Write your code here
+    helper(root,0);
+}
+
 void preorderTraversal(TreeNode<int>* root){
     //Edge Case
     if(root == NULL) return;
@@ -201,6 +214,12 @@ int main(){
     cout << endl;
     cout << "Max Data Node: " << maxDataNode(root)->data << endl;
 
+    cout << endl;
+    printLevelWise(root);
+    cout << "Replace with depth: " << endl;
+
+    replaceWithDepthValue(root);
+    printLevelWise(root);
     delete root;
 }
 
