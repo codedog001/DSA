@@ -6,6 +6,13 @@ using namespace std;
 
 // Valid binary tree (level wise): 1 2 3 4 -1 5 -1 -1 -1 -1 -1
 
+void inOrder(BinaryTreeNode<int>* root){
+    if(!root) return;
+    inOrder(root->left);
+    cout << root -> data << " ";
+    inOrder(root->right);
+}
+
 int countNodes(BinaryTreeNode<int>* root){
     int ans = 0;
     if(!root) return 0;
@@ -14,6 +21,21 @@ int countNodes(BinaryTreeNode<int>* root){
     return 1+left+right;
 }
 
+void preOrder(BinaryTreeNode<int> *root) {
+	// Write your code here
+    if(!root) return;
+    cout << root-> data << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+void postOrder(BinaryTreeNode<int> *root) {
+	// Write your code here
+    if(root==nullptr) return;
+    postOrder(root->left);
+    postOrder(root->right);
+    cout<< root->data << ' ';
+}
 
 
 void printTree(BinaryTreeNode<int>* root){
@@ -103,6 +125,11 @@ int main(){
     cout << endl;
 
     cout << "No. of nodes: " << countNodes(r1) << endl;
+
+    cout << "InOrder Traversal: ";
+    inOrder(r1);
+    cout << endl;
+
 }
 
 // Valid binary tree (level wise): 1 2 3 4 -1 5 -1 -1 -1 -1 -1
