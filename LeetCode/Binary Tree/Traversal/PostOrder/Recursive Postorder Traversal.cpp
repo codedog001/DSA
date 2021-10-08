@@ -1,11 +1,11 @@
 1. Return Vector
 
 vector<int> v;
-vector<int> preOrder(TreeNode* root){
+vector<int> postOrder(TreeNode* root){
     if(!root) return v;
-    v.push_back(root->val);
     postOrder(root->left);
     postOrder(root->right); 
+    v.push_back(root->val);
     return v;
 }
 
@@ -14,7 +14,7 @@ vector<int> preOrder(TreeNode* root){
 void preOrder(BinaryTreeNode<int> *root) {
 	// Write your code here
     if(!root) return;
-    cout << root-> data << " ";
     preOrder(root->left);
     preOrder(root->right);
+    cout << root-> data << " ";
 }
