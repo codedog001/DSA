@@ -1,55 +1,28 @@
-vector < vector < int >> zigzagLevelOrder(TreeNode * root) {
-      vector < int > temp;
-      vector < vector < int >> res;
-      if (!root) return res;
+If flag isReversed is true, then insert the value in temp in reverse order, and switch the boolean after each level.
 
-      stack < TreeNode * > s1, s2;
-      s1.push(root);
-      int currentLevelRemaining = 1;
-      int nextLevelCount = 0;
-      bool flag = true;
-      while (!s1.empty() || !s2.empty()) {
-        if (flag) {
-          TreeNode * top = s1.top();
-          s1.pop();
-          temp.push_back(top -> val);
-          currentLevelRemaining--;
-          if (top -> left != NULL) {
-            s2.push(top -> left);
-            nextLevelCount++;
-          }
-          if (top -> right != NULL) {
-            s2.push(top -> right);
-            nextLevelCount++;
-          }
-          if (currentLevelRemaining == 0) {
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        if(!root) return res;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        bool isReversed = false;
+        while(!q.empty()){
+            int n= q.size();
+            vector<int> temp(n);
+            for(int i=0; i<n; i++){
+                auto front = q.front();
+                q.pop();
+				
+				//isReversed -> true, then insert elements in temp in reverse fashion.
+                int index = isReversed ? n-i-1 : i;
+                temp[index] = front->val;
+                
+                if(front -> left) q.push(front->left);
+                if(front -> right) q.push(front->right);
+            }
+            isReversed = !isReversed;
             res.push_back(temp);
-            temp.clear();
-            currentLevelRemaining = nextLevelCount;
-            nextLevelCount = 0;
-            flag = false;
-          }
-        } else {
-          TreeNode * top = s2.top();
-          s2.pop();
-          temp.push_back(top -> val);
-          currentLevelRemaining--;
-          if (top -> right != NULL) {
-            s1.push(top -> right);
-            nextLevelCount++;
-          }
-          if (top -> left != NULL) {
-            s1.push(top -> left);
-            nextLevelCount++;
-          }
-          if (currentLevelRemaining == 0) {
-            res.push_back(temp);
-            temp.clear();
-            currentLevelRemaining = nextLevelCount;
-            nextLevelCount = 0;
-            flag = true;
-          }
         }
-      }
-      return res;
+        return res;
     }
