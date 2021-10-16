@@ -10,5 +10,6 @@
         "ranges": "cpp",
         "span": "cpp",
         "algorithm": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
