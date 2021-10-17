@@ -1,3 +1,28 @@
+2. Recursive Reverse Inorder Traversal
+Logic/Hypothesis: Function will return sum which will be sum of all nodes greater than current node.
+
+T.C: O(N)
+S.C: O(H)
+
+     TreeNode* bstToGst(TreeNode* root) {
+        int sum = 0;
+        helper(root, sum);
+        return root;
+    }
+    
+    int helper(TreeNode* root, int sum){
+        if(!root) return sum;
+        sum = helper(root -> right, sum);
+        
+        sum += root -> val;
+        root -> val = sum;
+        
+        sum = helper(root->left, sum);
+        return sum;
+    }
+
+    
+1. Iterative Inorder Traversal
 3 Steps to get desired result:
 
 Store inorder traversal in vector
@@ -18,7 +43,7 @@ TreeNode* bstToGst(TreeNode *root) {
         a[i] = a[i] + a[i+1];
     }
 	
-//Do a final inorder traversal to replace values with values in array - O(N)
+//Do a final inorder traversal to replace the original values with values in array - O(N)
     iterativeInorder(root, a);
 	return root;
 }
