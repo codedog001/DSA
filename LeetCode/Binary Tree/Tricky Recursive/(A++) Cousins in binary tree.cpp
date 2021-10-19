@@ -26,6 +26,9 @@ bool isCousins(TreeNode* root, int x, int y) {
     private:
     int depthX=-1, depthY=-1;
     TreeNode *parentX = NULL, *parentY= NULL;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 2. Iterative:
 Logic: Doing BFS, If we find one of the nodes having value x or y, say we found x, we make the other one i.e. y = toSearch, when we find both x and y, we have to check whether they are siblings, if they are not siblings, return true, else false.
 
