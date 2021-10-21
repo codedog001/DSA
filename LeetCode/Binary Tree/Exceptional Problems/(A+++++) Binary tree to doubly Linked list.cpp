@@ -1,5 +1,5 @@
     node* bd(node* root){
-    // Base case
+    // Base case.
     if (root == NULL)
         return root;
  
