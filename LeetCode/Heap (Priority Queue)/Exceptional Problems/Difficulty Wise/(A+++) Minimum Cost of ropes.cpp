@@ -1,13 +1,16 @@
-    int mergeStones(vector<int>& stones, int k) {
-        int cost = 0;
-        priority_queue<int, vector<int>, greater<int>> minHeap;
-        for(auto &g:stones) minHeap.push(g);
+    long long minCost(long long arr[], long long n) {
+        // Your code here
+        long long cost = 0;
+        priority_queue<long long, vector<long long>, greater<long long>> minHeap;
+        for(long long i=0; i<n; i++) minHeap.push(arr[i]);
         while(minHeap.size()>1){
-            int a = minHeap.top();
+            long long a = minHeap.top();
             minHeap.pop();
-            int b = minHeap.top();
+            long long b = minHeap.top();
             minHeap.pop();
             cost += a+b;
+            minHeap.push(a+b);
         }
-        return cost+=minHeap.top();
+        return cost;
+    
     }
