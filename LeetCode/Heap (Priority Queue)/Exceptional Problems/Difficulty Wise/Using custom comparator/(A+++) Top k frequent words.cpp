@@ -5,7 +5,7 @@ class CustomGreat{
 	
 	// () operator is overloaded
     bool operator () (pi &a, pi &b){
-        //TRUE MEANS SWAP
+        //TRUE MEANS NO SWAP
         //Compare frequency 
         if(a.first > b.first) {
             return true;

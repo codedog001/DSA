@@ -1,11 +1,11 @@
-//TRUE MEANS SWAP
+//TRUE MEANS NO SWAP
 typedef pair<int, int> ppi;
 class CustomGreat{
     public:
     bool operator () (ppi &a, ppi &b){
         
         //Compare frequency 
-        //TRUE MEANS SWAP
+        //TRUE MEANS NO SWAP
         if(a.first > b.first) {
             // cout << "true" << endl;
             return true;
