@@ -4,7 +4,7 @@ class CustomGreat{
     public:
     bool operator () (ppi &a, ppi &b){
         
-        //Compare frequency 
+        //Compare frequency:
         //TRUE MEANS NO SWAP
         if(a.first > b.first) {
             // cout << "true" << endl;
