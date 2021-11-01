@@ -1,4 +1,4 @@
-//To be solved in O(n) T.C.
+//Differentiating Point: To be solved in O(n) T.C.
 // P.S: You are given an array of unique integers that contain numbers in random order. You have to find the longest possible sequence of consecutive numbers using the numbers from given array.
 // You need to return the output array which contains starting and ending element. If the length of the longest possible sequence is one, then the output array must contain only single element.
 
@@ -7,6 +7,10 @@
 // 2 12 9 16 10 5 3 20 25 11 1 8 6 
 // Sample Output 1 :
 // 8 12 
+
+CN (Harder): https://classroom.codingninjas.com/app/classroom/me/8005/content/121480/offering/1419240/problem/623
+Leetcode: https://leetcode.com/problems/longest-consecutive-sequence/
+
 
 #include<unordered_map>
 vector<int> longestConsecutiveIncreasingSequence(int *arr, int n) {

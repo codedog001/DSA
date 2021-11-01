@@ -8,6 +8,10 @@
 // Sample Output 1 :
 // 8 12 
 
+CN (Harder): https://classroom.codingninjas.com/app/classroom/me/8005/content/121480/offering/1419240/problem/623
+Leetcode: https://leetcode.com/problems/longest-consecutive-sequence/
+
+
 #include<unordered_map>
 vector<int> longestConsecutiveIncreasingSequence(int *arr, int n) {
     // Your Code goes here
