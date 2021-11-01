@@ -9,7 +9,11 @@
         "string_view": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp"
     },
     "cmake.configureOnOpen": false
 }
