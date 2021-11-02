@@ -36,6 +36,10 @@ public:
     bool startsWith(string prefix) {
         return startsWith(root, prefix);
     }
+
+    void removeWord(string word){
+        removeWord(root, word);
+    }
     
     private:
     void insert(TrieNode* root, string word){
@@ -87,5 +91,34 @@ public:
         }else return false;
         
         return startsWith(child, word.substr(1));
+    }
+
+
+    void removeWord(TrieNode* root, string word){
+        if(word.size() == 0){
+            root->isTerminal = false;
+            return;
+        }
+
+        int index = word[0] - 'a';
+        TrieNode* child;
+
+        if(root->children[index] != NULL){
+            child = root->children[index];
+        }else {
+            //Word not found
+            return;
+        }
+        removeWord(child, word.substr(1));
+
+        //Remove child if it is useless
+        if(!child->isTerminal){
+            //Child should not have any children if it is going to be deleted.
+            for(int i=0; i<26;i++){
+                if(child->children[i] != NULL) return;
+            }
+            delete child;
+            root->children[index] = NULL;
+        }
     }
 };
