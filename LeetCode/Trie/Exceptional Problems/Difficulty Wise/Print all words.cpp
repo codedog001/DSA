@@ -12,3 +12,5 @@ void print(TrieNode* root){
     string op = "";
     print(root, op);
 }
+
+//P.S: Trie print all words from given node
