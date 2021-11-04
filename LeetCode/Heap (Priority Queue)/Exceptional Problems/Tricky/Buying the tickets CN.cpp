@@ -5,12 +5,15 @@ The tickets are sold in the following manner -
 1. The first person (pi) in the queue requests for the ticket.
 2. If there is another person present in the queue who has higher priority than pi, then ask pi to move at end of the queue without giving him the ticket.
 3. Otherwise, give him the ticket (and don't make him stand in queue again).
+
 Giving a ticket to a person takes exactly 1 minute and it takes no time for removing and adding a person to the queue. And you can assume that no new person joins the queue.
 Given a list of priorities of N persons standing in the queue and the index of your priority (indexing starts from 0). Find and return the time it will take until you get the ticket.
+
 Input Format:
 The first line of input contains an integer, that denotes the value of total number of people standing in queue or the size of the array of priorities. Let us denote it with the symbol N.
 The following line contains N space separated integers, that denote the value of the elements of the array of priorities.
 The following contains an integer, that denotes the value of index of your priority. Let us denote it with symbol k.
+
 Output Format :
 The first and only line of output contains the time required for you to get the ticket.
 Constraints:
