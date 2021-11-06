@@ -1,4 +1,4 @@
-1. Memoization
+//1. Memoization
 
     int climbStairsHelper(int n, vector<int>& t){
         if(n<=1) return 1;
@@ -11,8 +11,8 @@
         return climbStairsHelper(n,t);
     }
 
-    
-2. Tabulation (DP)
+
+//2. Tabulation (DP)
 
 int climbStairs(int n) {
         int t[n+1];
