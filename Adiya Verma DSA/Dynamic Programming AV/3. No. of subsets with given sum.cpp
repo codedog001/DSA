@@ -11,13 +11,13 @@ GFG
         if(n <= 0) return 0;
         
         //Check if answer already exists
-        if(t[n][sum] != -1) return t[n][sum];
+        if(t[n][sum] != -1) return t[n][sum] % 1000000007;
         
         //Choice Diagram
         if(arr[n-1] <= sum){
             return t[n][sum] = (pum(arr, n-1, sum-arr[n-1],t) +pum(arr, n-1, sum,t))  % 1000000007; 
         }else{
-            return t[n][sum] = pum(arr, n-1, sum,t);
+            return t[n][sum] = pum(arr, n-1, sum,t) % 1000000007;
         }
         
 	}

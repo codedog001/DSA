@@ -1,3 +1,8 @@
+//0-1 Knapsack
+https://practice.geeksforgeeks.org/problems/minimum-sum-partition3317/1
+
+//Ends
+
 ------------------------------------------------------------------------------------------------------------
 //Sliding Window
 
@@ -31,6 +36,7 @@ https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/
 1. https://classroom.codingninjas.com/app/classroom/me/8005/content/121476/offering/1419179/problem/78
 Problem Statement: write code to create a separate linked list for each level, return array of head.
 //Ends.
+
 
 
 
