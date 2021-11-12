@@ -1,4 +1,5 @@
 Logic: Explained as comments in recursive code. Also, remember to pass string by reference in memoized solution to avoid TLE.
+T.C of recursive and memoized solution: O(NM), where N, M is the length of s and p.
 
 1. Recursive
 
