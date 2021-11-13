@@ -1,4 +1,4 @@
-If flag isReversed is true, then insert the value in temp in reverse order, and switch the boolean after each level.
+//If flag isReversed is true, then insert the value in temp in reverse order, and switch the boolean after each level.
 
 vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         vector<vector<int>> res;
