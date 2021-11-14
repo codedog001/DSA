@@ -1,11 +1,24 @@
 0. Optimal
-int timeRequiredToBuy(vector<int>& A, int k) {
-        int ans = 0;
-        for (int i = 0; i < A.size(); ++i) {
-            ans += min(A[k] - (i > k), A[i]);
+For an optimized approach :
+
+Add min(tickets[i],tickets[k]) upto k (inclusive).
+Add min(tickets[i],tickets[k] - 1) after k.
+Return the count.
+Time : O(n) , Space : O(1)
+
+class Solution {
+    public int timeRequiredToBuy(vector<int> tickets, int k) {
+        int res = 0;
+        for(int i = 0;i<tickets.size();i++){
+            if(i <= k){
+                res += min(tickets[k],tickets[i]);
+            }else{
+                res += min(tickets[k] - 1,tickets[i]);
+            }
         }
-        return ans;
+        return res;
     }
+}
 
 
 1. Brute Force
