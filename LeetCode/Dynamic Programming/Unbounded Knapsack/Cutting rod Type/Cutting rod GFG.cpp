@@ -7,7 +7,7 @@ int cutRod(int price[], int n) {
         
         int t[size+1][w+1];
         
-        //Initialization
+        //Initialization.
         for(int i=0; i<size+1; i++) t[i][0] = 0;
         for(int j=0; j<w+1; j++) t[0][j] = 0;
         
