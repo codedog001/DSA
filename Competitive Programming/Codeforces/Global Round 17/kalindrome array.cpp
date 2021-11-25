@@ -134,6 +134,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout << fixed << setprecision(20);
+    //
  
     int t;
     cin >> t;
