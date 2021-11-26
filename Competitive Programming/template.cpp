@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+using ull = unsigned long long;
 using ll = long long;
 using vi = vector<int>;
 using vb = vector<bool>;
 using pii = pair<int, int>;
+using pll = pair<long, long>;
 
 // Vectors
 #define pb push_back
@@ -31,6 +33,36 @@ const double PI = acos((double)-1);
 const int MAX_N = 1e5 + 1;
 
 // Utility functions
+
+//Custom comparator for priority queue.
+class Custom{
+    public:
+    bool operator () (pii &a, pii &b){
+        
+        // cout << "Pair a: <" << a.first << "," << a.second << "> b: <" << b.first << "," << b.second << "> ";
+        //Compare frequency 
+        if(a.second > b.second) {
+            // cout << "true" << endl;
+            return true;
+        }
+        
+        return false;
+    }
+};
+
+bool isPrime(ll n)
+{
+    // Corner case
+    if (n <= 1)
+        return false;
+  
+    // Check from 2 to n-1
+    for (ll i = 2; i < n; i++)
+        if (n % i == 0)
+            return false;
+  
+    return true;
+}
 
 // Binary Exponentiation
 long long binpow(long long a, long long b, long long m = MOD)
@@ -66,28 +98,8 @@ inline void submod(int &a, int val, int p = MOD)
 void solve() {
 
     // Effort might not always be fruitful, but it's never wasted.
-
-    int n;
-    cin >> n;
-
-    vector<ll> a(n);
-    int count1 = 0, count2 = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-
-    for (int i = 0; i < n; i++) {
-        if (a[i] % 3 == 1) count1++;
-        else if (a[i] % 3 == 2) count2++;
-    }
-
-    int ans = min(count1, count2);
-    int rem = max(count1, count2) - ans;
-    if (rem % 3 == 0) {
-        ans += 2 * (rem / 3);
-    } else ans = -1;
-
-    cout << ans << endl;
+    
+    return;
     
 }
 
@@ -105,8 +117,8 @@ int main()
     cin.tie(nullptr);
     cout << fixed << setprecision(20);
 
-    int t;
-    cin >> t;
-    while (t--)
+    // int t;
+    // cin >> t;
+    // while (t--)
         solve();
 }
