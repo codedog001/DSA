@@ -7,6 +7,13 @@ using vi = vector<int>;
 using vb = vector<bool>;
 using pii = pair<int, int>;
 using pll = pair<long, long>;
+using umi = unordered_map<int, int>;
+using umc = unordered_map<char, int>;
+using uml = unordered_map<long long, long long>;
+using usi = unordered_set<int>;
+using usl = unordered_set<long long>;
+using usc = unordered_set<char>;
+using uss = unordered_set<string>;
 
 // Vectors
 #define pb push_back
@@ -34,6 +41,24 @@ const int MAX_N = 1e5 + 1;
 
 // Utility functions
 
+static inline void ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }));
+}
+
+// trim from end (in place)
+static inline void rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }).base(), s.end());
+}
+
+ll firstDigit(ll n){
+    string res = to_string(n);
+    return res[0]-48;
+}
+
 //Custom comparator for priority queue.
 class Custom{
     public:
@@ -49,6 +74,11 @@ class Custom{
         return false;
     }
 };
+
+bool doubleIsInt(double trouble) {
+   double absolute = abs( trouble );
+   return absolute == floor(absolute);
+}
 
 bool isPrime(ll n)
 {
@@ -95,13 +125,16 @@ inline void submod(int &a, int val, int p = MOD)
 // vector<int> g[MAX_N];
 // vector<bool> vis(MAX_N);
 
+
+
 void solve() {
 
     // Effort might not always be fruitful, but it's never wasted.
     
-    return;
     
+    return;
 }
+
 
 /*  Few general reminders:
     * Analyse constraints, look for bruteforce oppurtunities
