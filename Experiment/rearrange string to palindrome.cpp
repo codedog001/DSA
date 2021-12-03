@@ -63,7 +63,7 @@ inline void submod(int &a, int val, int p = MOD)
 
 // // Graphs
 // vector<int> g[MAX_N];
-// vector<bool> vis(MAX_N);
+//. vector<bool> vis(MAX_N);
 
 bool isPalindrome(string& s){
     int i=0,n = s.size(),j=n-1;
