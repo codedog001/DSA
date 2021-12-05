@@ -11,8 +11,7 @@ void printGraphBFS(int n, int** edges, int startVertex, bool* visited){
         q.pop();
         cout << top << " ";
         for(int i=0; i<n; i++){
-            if(visited[i] == true) continue;
-            else if(edges[top][i] == 1) {
+            if(edges[top][i] == 1 && !visited[i]) {
                 q.push(i);
                 visited[i] = true;
             }
@@ -55,7 +54,13 @@ int main(){
     for(int i=0; i<n; i++){
         visited[i] = false;
     }
-
-    // printGraphDFS(n, edges, 0, visited);
-    printGraphBFS(n, edges, 0, visited);
+    
+    for(int i=0; i<n; i++){
+        if(!visited[i])  printGraphDFS(n, edges, i, visited);
+    }
+    // 
+    for(int i=0; i<n; i++){
+        if(!visited[i])  printGraphBFS(n, edges, i, visited);
+    }
+    
 }
