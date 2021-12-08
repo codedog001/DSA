@@ -14,34 +14,25 @@ class Edge{
     }
 };
 
-//Union Find algorithm
+int findParent(int v, vector<int> parent){
+    if(v == parent[v]) return v;
+    return findParent(parent[v], parent);
+}
+
+
 bool notAddsCycle(Edge e, vector<int>& parent){
     //Check if this edge will add cycle
-    if(parent[e.v1] != parent[e.v2]){
-        int ov1 = e.v1, ov2 = e.v2, newParent = e.v1, parent1 = parent[e.v1], parent2 = parent[e.v2];
+    int ov1 = e.v1, ov2 = e.v2, parent1 = parent[e.v1], parent2 = parent[e.v2];
         
-        if(parent1 != e.v1){
-            while(parent[e.v1] != e.v1){
-                e.v1 = parent[e.v1];
-            }
-            newParent = e.v1;
-            parent1 = e.v1;
-        }
+    //Find parent of v1 and v2
+    parent1 = findParent(e.v1, parent);
+    parent2 = findParent(e.v2, parent);
         
-        if(parent2 != e.v2){
-            while(parent[e.v2] != e.v2){
-                e.v2 = parent[e.v2];
-            }
-            parent2 = e.v2;
-        }
-        
-        if(parent1 != parent2){
-            parent[ov2] = newParent;
-            return true;
-        }
-        return false;
+    if(parent1 != parent2){
+        parent[ov2] = parent1;
+        return true;
     }
-	return false;
+    return false;
 }
 
 bool customSort(Edge& a, Edge& b){
