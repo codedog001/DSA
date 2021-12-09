@@ -3,7 +3,7 @@ using namespace std;
 
 
 bool queenExists(vector<vector<int>>& a, int r, int c){
-    //Search for queen in all 8 directions manually
+    //Search for queen in all 3 directions manually
     	int n = a.size();
         //1. Search upwards
         int m = r;
