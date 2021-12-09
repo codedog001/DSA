@@ -14,7 +14,7 @@ class Edge{
     }
 };
 
-int findParent(int v, vector<int> parent){
+int findParent(int v, vector<int>& parent){
     if(v == parent[v]) return v;
     return findParent(parent[v], parent);
 }
