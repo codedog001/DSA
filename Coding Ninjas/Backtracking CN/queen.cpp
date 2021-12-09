@@ -12,28 +12,7 @@ bool queenExists(vector<vector<int>>& a, int r, int c){
             m--;
         }
         
-        //2. Search downwards
-        m= r;
-        while(m<n){
-            if(a[m][c] == 1) return true;
-            m++;
-        }
-        
-        //3. Search left
-        m=c;
-    	while(m>=0){
-            if(a[r][m] == 1) return true;
-            m--;
-        }
-    
-    	//4. Search right
-    	m=c;
-    	while(m<n){
-            if(a[r][m] == 1) return true;
-            m++;
-        }
-    
-    	//5. Search Upper right
+    	//2. Search Upper right
     	int z = r;
     	m=c;
     	while(m<n && z>=0){
@@ -42,31 +21,13 @@ bool queenExists(vector<vector<int>>& a, int r, int c){
             m++;
         }
     
-    	//6. Search Upper left
+    	//3. Search Upper left
     	z = r;
     	m=c;
     	while(m>=0 && z>=0){
             if(a[z][m] == 1) return true;
             z--;
             m--;
-        }
-    
-    	//7. Search down right
-    	z = r;
-    	m=c;
-    	while(m<n && z<n){
-            if(a[z][m] == 1) return true;
-            z++;
-            m++;
-        }
-    
-    	//8. Search down left
-    	z = r;
-    	m=c;
-    	while(m<n && z>=0){
-            if(a[z][m] == 1) return true;
-            z--;
-            m++;
         }
     
     	return false;
@@ -83,13 +44,13 @@ void nQueenHelper(int n, int row, vector<vector<int>>& a, int placedQueens){
     if(row > n) return;
     if(placedQueens == n) {
         for(auto &c:a){
-                for(auto &m:c){
-                    cout << m <<" ";
-                }
+            for(auto &m:c){
+                cout << m <<" ";
             }
-            cout << endl;
-        return;
-    }
+        }
+        cout << endl;
+    	return;
+	}
     //Find a safe pos in the 4 columns
     for(int i=0; i<n; i++){
         if(queenSurvives(a, row, i)){
