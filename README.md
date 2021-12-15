@@ -1,1 +1,1 @@
-### I store the problem solving code here - Leetcode/GFG/Some CP/etc.
+### I store the problem solving code here - Leetcode/GFG/CP/etc.
