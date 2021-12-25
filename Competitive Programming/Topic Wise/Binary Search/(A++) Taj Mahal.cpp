@@ -32,7 +32,33 @@ void solve() {
 
 }
 
-
+//2. O(n) Method, by finding t (resi) in O(1).
+void solve() {
+    
+    // Effort might not always be fruitful, but it's never wasted.
+    ll n, mini = INT_MAX, resi = 0;
+    cin >> n;
+    vector<ll> a(n+1,0);
+    for(int i=1; i<n+1; i++) cin >> a[i];
+    
+    for(int i=1; i<n+1; i++){
+        ll t, val;
+        val = (a[i] - i +1) ;
+        if(val<0) val = 0;
+        t = val/n;
+        if((val%n) != 0) t += 1;
+        ll result = i + (t*n);
+        a[i] = result;
+        
+    }
+    for(int i=1; i<n+1; i++){
+        if(a[i] < mini){
+            mini = a[i];
+            resi = i;
+        }
+    }
+	cout << resi << endl;
+}
 
 /*  Few general reminders:
     * Analyse constraints, look for bruteforce oppurtunities
