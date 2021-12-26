@@ -6,7 +6,7 @@ using namespace std;
 #define ll long long
 
 ll merge(vector<ll>& a, ll start, ll mid, ll end){
-    ll i=start, j= mid,k = 0, n= a.size(), res = 0;
+    ll i=start, j= mid, k = 0, n= a.size(), res = 0;
     
     vector<ll> temp(end-start+1,0);
     while(i < mid && j<=end){
