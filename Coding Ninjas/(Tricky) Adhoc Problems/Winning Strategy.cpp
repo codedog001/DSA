@@ -22,9 +22,8 @@ void getResult(vector<ll>& a, ll n){
             swap(a[i], a[i+1]);
         }
         else if(i < n-1 && a[i+2] == i){
-            a[i+2] = a[i+1];
-            a[i+1] = a[i];
-            a[i] = i;                
+            swap(a[i+1], a[i+2]);
+            swap(a[i], a[i+1]);                
             swapsNeeded+=2;
         }
         else{
