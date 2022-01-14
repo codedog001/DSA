@@ -17,4 +17,24 @@ vector<int> repeatedNumber(vector<int> &nums) {
         return len;
 }
 
-//2. When modification is not allowed use slow and fast pointers
+//2. When modification is not allowed use Floyd's Tortoise and Hare (Cycle Detection)
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int slow = nums[0], fast = nums[0];
+        
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while(slow != fast);
+        
+        fast = nums[0];
+        
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        } 
+        
+        return slow;
+    }
+};
