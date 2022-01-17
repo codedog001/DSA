@@ -32,3 +32,30 @@ public:
         return newHead;
     }
 };
+
+//2. Using hashmap
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head) return head;
+        Node* p = head, *newHead=NULL;
+        
+        
+        unordered_map<Node*, Node*> m;
+        
+        while(p){
+            m[p] = new Node(p->val);
+            p = p->next;
+        }
+        
+        p=head;
+        while(p){
+            m[p]->next = m[p->next];
+            m[p]->random = m[p->random];
+            p=p->next;
+        }
+        
+        newHead = m[head];
+        return newHead;
+    }
+};
