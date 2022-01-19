@@ -1,11 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void topologicalSortDFS(int i, vector<int>& visited, vector<int> adj[], stack<int>& st){
+    if(visited[i] == 1) return;
+    visited[i] = 1;
+    vector<int> t = adj[i];
+    for(auto &num: t){
+        topologicalSortDFS(num, visited, adj, st);
+    }
+    st.push(i);
+}
 
 bool directedGraphHasCycleDFS(int i, vector<int>& visited, vector<int>& currentCallVisited, vector<int> adj[]){
     if(visited[i] == 1 && currentCallVisited[i] == 1) return true;
     else if(visited[i] == 1) return false;
-    
+
     visited[i] = 1;
     currentCallVisited[i] = 1;
 
@@ -220,7 +229,6 @@ int main(){
 
     // if(flag) cout << "It is a bipartite graph." << endl;
 
-    //Check if directed graph has cycle using DFS
 
     //Create directed adjacency list
     vector<int> dirAdj[n+1];
@@ -230,18 +238,35 @@ int main(){
         dirAdj[u].push_back(v);
     }
 
+    //Detect cycle in directed graph using DFS
+    // vector<int> currentCallVisited(n+1, 0);
+    // bool flag = false;
+    // for(int i=1; i<=n; i++){
+    //     if(directedGraphHasCycleDFS(i, visited, currentCallVisited, dirAdj)){
+    //         cout << "Given directed graph contains cycle." << endl;
+    //         flag = true;
+    //         break;
+    //     }
+    // }
+    // if(!flag) cout<< "Given directed graph does not contain cycle." << endl;
+    
+    
 
-    vector<int> currentCallVisited(n+1, 0);
-    bool flag = false;
+    //Topological sort
+    //It is only possible for directed acyclic graph.
+    stack<int> st;
     for(int i=1; i<=n; i++){
-        if(directedGraphHasCycleDFS(i, visited, currentCallVisited, dirAdj)){
-            cout << "Given directed graph contains cycle." << endl;
-            flag = true;
-            break;
+        if(visited[i] == 0){
+            topologicalSortDFS(i, visited, dirAdj, st);
         }
     }
-    if(!flag) cout<< "Given directed graph does not contain cycle." << endl;
-    
+
+    //Print result of sorting
+    cout << "Topological Sort Result: " << endl;
+    while(!st.empty()){
+        cout << st.top()<< " ";
+        st.pop();
+    }
 
 }                             
 //Sample input with cycle:  
@@ -281,5 +306,5 @@ int main(){
 7 2
 7 8
 8 9
-9 7
+7 9
 */
