@@ -2,6 +2,23 @@
 using namespace std;
 
 
+bool directedGraphHasCycleDFS(int i, vector<int>& visited, vector<int>& currentCallVisited, vector<int> adj[]){
+    if(visited[i] == 1 && currentCallVisited[i] == 1) return true;
+    else if(visited[i] == 1) return false;
+    
+    visited[i] = 1;
+    currentCallVisited[i] = 1;
+
+    vector<int> t = adj[i];
+    for(auto &num:t){
+        if(directedGraphHasCycleDFS(num, visited, currentCallVisited, adj)) return true;
+    }
+    currentCallVisited[i] = 0;
+
+    return false;
+}
+
+
 
 bool checkBipartiteDFS(int i, vector<int>& color, vector<int>& visited, vector<int> adj[]){
     visited[i] = 1;
@@ -111,14 +128,17 @@ int main(){
     int n, e;
     cin >> n >> e;
 
-    //Create adjacency list
-    vector<int> adj[n+1];
-    for(int i=0; i<e; i++){
-        int u, v;
-        cin >> u>> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
+    //Create undirected adjacency list
+    // vector<int> undirAdj[n+1];
+    
+    // for(int i=0; i<e; i++){
+    //     int u, v;
+    //     cin >> u>> v;
+    //     undirAdj[u].push_back(v);
+    //     undirAdj[v].push_back(u);
+    // }
+
+    
 
     // Print adjacency list
     // for(int i=1; i<=n; i++){
@@ -186,19 +206,41 @@ int main(){
     // if(flag) cout << "It is a bipartite graph." << endl;
 
     //Check if graph is bipartite through DFS
-    bool flag = true;
-    vector<int> color(n+1, -1);
-    for(int i=1; i<=n; i++){
-        if(visited[i] == 0){
-            if(!checkBipartiteDFS(i, color, visited, adj)){
-                cout << "Not a bipartite graph." << endl;
-                flag = false;
-                break;
-            }
-        }
+    // bool flag = true;
+    // vector<int> color(n+1, -1);
+    // for(int i=1; i<=n; i++){
+    //     if(visited[i] == 0){
+    //         if(!checkBipartiteDFS(i, color, visited, undirAdj)){
+    //             cout << "Not a bipartite graph." << endl;
+    //             flag = false;
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // if(flag) cout << "It is a bipartite graph." << endl;
+
+    //Check if directed graph has cycle using DFS
+
+    //Create directed adjacency list
+    vector<int> dirAdj[n+1];
+    for(int i=0; i<e; i++){
+        int u, v;
+        cin >> u >> v;
+        dirAdj[u].push_back(v);
     }
 
-    if(flag) cout << "It is a bipartite graph." << endl;
+
+    vector<int> currentCallVisited(n+1, 0);
+    bool flag = false;
+    for(int i=1; i<=n; i++){
+        if(directedGraphHasCycleDFS(i, visited, currentCallVisited, dirAdj)){
+            cout << "Given directed graph contains cycle." << endl;
+            flag = true;
+            break;
+        }
+    }
+    if(!flag) cout<< "Given directed graph does not contain cycle." << endl;
     
 
 }                             
@@ -227,3 +269,17 @@ int main(){
 5 3
 */
 
+//Direct graph with cycle
+/*
+9 10
+1 2
+2 3
+3 4
+4 5
+3 6
+6 5
+7 2
+7 8
+8 9
+9 7
+*/
