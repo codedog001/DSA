@@ -149,7 +149,7 @@ void doTopologicalSortDFS(int n, vector<int>& visited, vector<int> dirAdj[]){
     }
 }
 
-void topologicalSortBFS(int n, vector<int> dirAdj[]){
+void topologicalSortBFS(int n, vector<int> dirAdj[], vector<int>& res){
     vector<int> indegree(n+1, 0);
 
     //1. Store indegree of each node in a vector
@@ -168,7 +168,7 @@ void topologicalSortBFS(int n, vector<int> dirAdj[]){
 
     while(!q.empty()){
         int node = q.front();
-        cout << node << " ";
+        res.push_back(node);
         q.pop();
         vector<int> t = dirAdj[node];
         for(auto &num:t){
@@ -177,6 +177,27 @@ void topologicalSortBFS(int n, vector<int> dirAdj[]){
         }
     }
 }
+
+void directedHasCycleBFS(int n, vector<int> dirAdj[]){
+    vector<int> res;
+    topologicalSortBFS(n, dirAdj, res);
+    if(res.size() < n) {
+        cout << "Directed Graph has cycle, checked through BFS" << endl;
+    }
+    else cout << "Directed Graph doesn't have cycle, checked through BFS" << endl;;
+}
+
+void doTopologicalSortBFS(int n, vector<int> dirAdj[]){
+    vector<int> res;
+    topologicalSortBFS(n, dirAdj, res);
+    //Print result of sorting
+    cout << "Topological Sort Result: " << endl;
+    for(auto& n:res){
+        cout << n << " ";
+    }    
+    cout << endl;
+}
+
 
 
 int main(){
@@ -284,7 +305,12 @@ int main(){
         dirAdj[u].push_back(v);
     }
 
-    //Detect cycle in directed graph using DFS
+    //Detect cycle in directed graph
+    //0. Using BFS (Kahn's algo): It is done by topological sort, if o.p of topological sort < n -> graph contains cycle.
+    directedHasCycleBFS(n, dirAdj);
+
+    //1. using DFS
+    //It uses one more visited array other than normal visited array to keep track of nodes traversed in current DFS call.
     // vector<int> currentCallVisited(n+1, 0);
     // bool flag = false;
     // for(int i=1; i<=n; i++){
@@ -302,7 +328,8 @@ int main(){
     // doTopologicalSortDFS(n, visited, dirAdj);
 
     //BFS topological sort is also known as kahn's algo.
-    topologicalSortBFS(n, dirAdj); 
+    // doTopologicalSortBFS(n, dirAdj); 
+
 
 }                             
 //Sample input with cycle:  
@@ -342,5 +369,5 @@ int main(){
 7 2
 7 8
 8 9
-7 9
+9 7
 */
