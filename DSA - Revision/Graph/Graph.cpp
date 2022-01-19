@@ -1,6 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+
+bool checkBipartiteDFS(int i, vector<int>& color, vector<int>& visited, vector<int> adj[]){
+    visited[i] = 1;
+    if(color[i] == -1) color[i] = 1;
+    vector<int> t = adj[i];
+    for(auto& num:t){
+        if(visited[num] == 0){
+            color[num] = 1-color[i];
+            if(!checkBipartiteDFS(num, color, visited, adj)) return false;
+        }
+        else if(visited[num] == 1 && color[num] == color[i]) return false;
+    }
+
+    return true;
+}
+
+
 bool checkBipartiteBFS(int i, vector<int>& color, vector<int>& visited, vector<int> adj[]){
     queue<int> q;
     q.push(i);
@@ -103,12 +121,12 @@ int main(){
     }
 
     // Print adjacency list
-    for(int i=1; i<=n; i++){
-        vector<int> p = adj[i];
-        cout << "Node " << i << " has edge with ";
-        for(auto &num:p) cout<< num << " ";
-        cout << endl;
-    }
+    // for(int i=1; i<=n; i++){
+    //     vector<int> p = adj[i];
+    //     cout << "Node " << i << " has edge with ";
+    //     for(auto &num:p) cout<< num << " ";
+    //     cout << endl;
+    // }
 
     vector<int> visited(n+1, 0);
 
@@ -153,11 +171,26 @@ int main(){
     // if(!flag) cout << "Cycle Doesn't exist" << endl;
 
     //Check if graph is bipartite through BFS
+    // bool flag = true;
+    // vector<int> color(n+1, -1);
+    // for(int i=1; i<=n; i++){
+    //     if(visited[i] == 0){
+    //         if(!checkBipartiteBFS(i, color, visited, adj)){
+    //             cout << "Not a bipartite graph." << endl;
+    //             flag = false;
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // if(flag) cout << "It is a bipartite graph." << endl;
+
+    //Check if graph is bipartite through DFS
     bool flag = true;
     vector<int> color(n+1, -1);
     for(int i=1; i<=n; i++){
         if(visited[i] == 0){
-            if(!checkBipartiteBFS(i, color, visited, adj)){
+            if(!checkBipartiteDFS(i, color, visited, adj)){
                 cout << "Not a bipartite graph." << endl;
                 flag = false;
                 break;
@@ -172,7 +205,7 @@ int main(){
 //Sample input with cycle:  
 /*
 8 8
-6 4
+8 4
 5 7
 3 2
 7 4
@@ -193,3 +226,4 @@ int main(){
 5 6
 5 3
 */
+
