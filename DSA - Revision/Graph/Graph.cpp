@@ -133,6 +133,52 @@ void bfs(int i, vector<int>& visited, vector<int> adj[]){
     }
 }
 
+void doTopologicalSortDFS(int n, vector<int>& visited, vector<int> dirAdj[]){
+    stack<int> st;
+    for(int i=1; i<=n; i++){
+        if(visited[i] == 0){
+            topologicalSortDFS(i, visited, dirAdj, st);
+        }
+    }
+
+    //Print result of sorting
+    cout << "Topological Sort Result: " << endl;
+    while(!st.empty()){
+        cout << st.top()<< " ";
+        st.pop();
+    }
+}
+
+void topologicalSortBFS(int n, vector<int> dirAdj[]){
+    vector<int> indegree(n+1, 0);
+
+    //1. Store indegree of each node in a vector
+    for(int i=1; i<=n; i++){
+        vector<int> to = dirAdj[i];
+        for(auto &num:to){
+             indegree[num]++;
+        }
+    }
+
+    queue<int> q;
+    //2. First push those nodes into queue whose indegree == 0.
+    for(int i=1; i<=n; i++){
+        if(indegree[i] == 0) q.push(i);
+    }
+
+    while(!q.empty()){
+        int node = q.front();
+        cout << node << " ";
+        q.pop();
+        vector<int> t = dirAdj[node];
+        for(auto &num:t){
+            indegree[num] -= 1;
+            if(indegree[num] == 0) q.push(num);
+        }
+    }
+}
+
+
 int main(){
     int n, e;
     cin >> n >> e;
@@ -252,21 +298,9 @@ int main(){
     
     
 
-    //Topological sort
-    //It is only possible for directed acyclic graph.
-    stack<int> st;
-    for(int i=1; i<=n; i++){
-        if(visited[i] == 0){
-            topologicalSortDFS(i, visited, dirAdj, st);
-        }
-    }
-
-    //Print result of sorting
-    cout << "Topological Sort Result: " << endl;
-    while(!st.empty()){
-        cout << st.top()<< " ";
-        st.pop();
-    }
+    //Topological sort: It is only possible for directed acyclic graph.
+    // doTopologicalSortDFS(n, visited, dirAdj);
+    topologicalSortBFS(n, dirAdj);
 
 }                             
 //Sample input with cycle:  

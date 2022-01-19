@@ -1,0 +1,3 @@
+Important Topics:
+1. Topological Sort - Specially using BFS
+2. Check whether graph is bipartite or not? - Uses Graph coloring
