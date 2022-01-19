@@ -1,14 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void topologicalSortDFS(int i, vector<int>& visited, vector<int> adj[], stack<int>& st){
+void topologicalSortDFS(int i, vector<int>& visited, vector<int> adj[], stack<int>& st, stack<int>& stForSomeOtherFun){
     if(visited[i] == 1) return;
     visited[i] = 1;
     vector<int> t = adj[i];
     for(auto &num: t){
-        topologicalSortDFS(num, visited, adj, st);
+        topologicalSortDFS(num, visited, adj, st, stForSomeOtherFun);
     }
     st.push(i);
+    stForSomeOtherFun.push(i);
 }
 
 bool directedGraphHasCycleDFS(int i, vector<int>& visited, vector<int>& currentCallVisited, vector<int> adj[]){
@@ -133,11 +134,11 @@ void bfs(int i, vector<int>& visited, vector<int> adj[]){
     }
 }
 
-void doTopologicalSortDFS(int n, vector<int>& visited, vector<int> dirAdj[]){
+void doTopologicalSortDFS(int n, vector<int>& visited, vector<int> dirAdj[], stack<int>& stForSomeFunction){
     stack<int> st;
-    for(int i=1; i<=n; i++){
+    for(int i=0; i<=n; i++){
         if(visited[i] == 0){
-            topologicalSortDFS(i, visited, dirAdj, st);
+            topologicalSortDFS(i, visited, dirAdj, st, stForSomeFunction);
         }
     }
 
@@ -198,6 +199,85 @@ void doTopologicalSortBFS(int n, vector<int> dirAdj[]){
     cout << endl;
 }
 
+void shortestDistance(int source, vector<int>& distance, vector<int> undirAdj[], int n){
+    queue<int> q;
+    q.push(source);
+    distance[source] = 0;
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        vector<int> t = undirAdj[node];
+        for(auto &num:t){
+            int curDistance = distance[node] + 1;
+            if(curDistance < distance[num]){
+                distance[num] = curDistance;
+                q.push(num);
+            }
+        }
+    }
+}
+
+void getShortestPath(vector<int> undirAdj[], int n){
+    vector<int> distance(n+1, INT_MAX);
+    int source = 1;
+    shortestDistance(source, distance, undirAdj, n);
+    for(int i=0; i<=n; i++){
+        cout << "Distance of " << i << " from source is: "<< distance[i] << endl;
+    }
+}
+
+void inputDirectedAcyclicWeightedGraph(vector<pair<int, int>> adj[], int e){
+    cout << "Enter u, v, w of directed acyclic weighted graph" << endl;
+    for(int i=0; i<e; i++){
+        int u, v, w;
+        cin >> u >> v >> w;
+        adj[u].push_back({v, w});
+    }
+}
+
+void findShortestPathInDAWG(int source, vector<pair<int, int>> dirWtdAdj[], int n, vector<int>& visited){
+    //Step 1: Get result of topological sort
+    stack<int> st;
+
+    //Another temporary adj list is created just to get result from topo sort without creating
+    //new function for this adj list because it has weights.
+    vector<int> tempAdjForTopoSort [n+1];
+    for(int i=0; i<n+1; i++){
+        vector<pair<int, int>> t = dirWtdAdj[i];
+        for(pair<int, int>n: t){
+            tempAdjForTopoSort[i].push_back(n.first);
+        }
+    }
+    doTopologicalSortDFS(n, visited, tempAdjForTopoSort, st);
+
+    //Now stack has result of topo sort.
+
+    //Step 2: distance array
+    vector<int> distance(n+1, INT_MAX);
+
+    //Step 3. Distance of source is 0.
+    distance[source] = 0;
+
+    //Step 4: Pop out nodes one by one from stack and calculate distance of thier neighbors
+    while(!st.empty()){
+        int node = st.top();
+        st.pop();
+        vector<pair<int, int>> t = dirWtdAdj[node];
+        for(auto& p:t){
+            int curDistance = distance[node] + p.second;
+            int neighbor = p.first;
+            if(curDistance < distance[neighbor]) distance[neighbor] = curDistance;
+        }
+    }
+
+    //Step 5: Print out the shortest distance from source to all nodes
+    cout << endl << endl;
+    cout << "Shortest Distance from " << source << " to all nodes in Directed Acyclic Weighted Graph: " << endl;
+    for(int i = 0; i<=n; i++){
+        cout << source << " to " << i << " : " << distance[i] << endl;
+    }
+}
+
 
 
 int main(){
@@ -205,7 +285,7 @@ int main(){
     cin >> n >> e;
 
     //Create undirected adjacency list
-    // vector<int> undirAdj[n+1];
+    vector<int> undirAdj[n+1];
     
     // for(int i=0; i<e; i++){
     //     int u, v;
@@ -304,12 +384,12 @@ int main(){
 //--------------------------------------------------------------------------------------------------
 
     //Create directed adjacency list
-    vector<int> dirAdj[n+1];
-    for(int i=0; i<e; i++){
-        int u, v;
-        cin >> u >> v;
-        dirAdj[u].push_back(v);
-    }
+    // vector<int> dirAdj[n+1];
+    // for(int i=0; i<e; i++){
+    //     int u, v;
+    //     cin >> u >> v;
+    //     dirAdj[u].push_back(v);
+    // }
 
 // ----------------------------------------------------------------------------------------------
 
@@ -340,8 +420,41 @@ int main(){
 
 //------------------------------------------------------------------------------------------------
 
+    //Shortest path from source to all other nodes in undirected graph with unit weight
+    //It is calculated through BFS
+    // getShortestPath(undirAdj, n);
+
+//------------------------------------------------------------------------------------------------
+
+    //Shortest path from source node to all other nodes in Directed Acyclic Weighted graph (DAG)
+    //Steps:
+    //1. Get output of topological sort
+    //2. Create distance array with values INT_MAX
+    //3. Assign distance[source] = 0
+    //4. Take nodes out one by one from result stack of topological sort, and visit neighbors of these
+    //nodes, and assing minimum(current cost, old cost).
+    //5. By the end, array will have minimum cost from source to all nodes.
+
+    vector<pair<int, int>> dirAcyclicWtdAdj[n+1];
+    inputDirectedAcyclicWeightedGraph(dirAcyclicWtdAdj, e);
+
+    // cout << "OUTPUT: " << endl;
+    // for(int i=0; i<=n; i++){
+    //     vector<pair<int, int>> t = dirAcyclicWtdAdj[i];
+    //     cout <<"Node " << i << "has edge with: " << endl;
+    //     for(int j=0; j< t.size(); j++){
+    //         cout << t[j].first << " having weight: " << t[j].second << endl;;
+    //     }
+    // }
+
+    int source = 0;
+    findShortestPathInDAWG(source, dirAcyclicWtdAdj, n, visited);
+
+// ----------------------------------------------------------------------------------------------------------------
+
+
 }                             
-//Sample input with cycle:  
+//Undirected graph with cycle:  
 /*
 8 8
 8 4
@@ -379,4 +492,16 @@ int main(){
 7 8
 8 9
 9 7
+*/
+
+//Directed Acyclic graph with weight
+/*
+6 7
+0 1 2
+1 2 3
+2 3 6
+0 4 1
+4 2 2 
+4 5 4
+5 3 1
 */
