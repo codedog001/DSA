@@ -226,6 +226,8 @@ int main(){
 
     vector<int> visited(n+1, 0);
 
+//--------------------------------------------------------------------------------------------------
+
     // cout << "BFS Traversal" << endl;
     // Traversal
     // for(int i=1; i<=n; i++){
@@ -239,6 +241,8 @@ int main(){
     //         dfs(i, visited, adj);
     //     }
     // }
+
+//--------------------------------------------------------------------------------------------------
 
     //Check Cycle through DFS
     // bool flag = false;
@@ -266,6 +270,7 @@ int main(){
     // }
     // if(!flag) cout << "Cycle Doesn't exist" << endl;
 
+//--------------------------------------------------------------------------------------------------
     //Check if graph is bipartite through BFS
     // bool flag = true;
     // vector<int> color(n+1, -1);
@@ -296,6 +301,7 @@ int main(){
 
     // if(flag) cout << "It is a bipartite graph." << endl;
 
+//--------------------------------------------------------------------------------------------------
 
     //Create directed adjacency list
     vector<int> dirAdj[n+1];
@@ -305,9 +311,11 @@ int main(){
         dirAdj[u].push_back(v);
     }
 
+// ----------------------------------------------------------------------------------------------
+
     //Detect cycle in directed graph
     //0. Using BFS (Kahn's algo): It is done by topological sort, if o.p of topological sort < n -> graph contains cycle.
-    directedHasCycleBFS(n, dirAdj);
+    // directedHasCycleBFS(n, dirAdj);
 
     //1. using DFS
     //It uses one more visited array other than normal visited array to keep track of nodes traversed in current DFS call.
@@ -322,7 +330,7 @@ int main(){
     // }
     // if(!flag) cout<< "Given directed graph does not contain cycle." << endl;
     
-    
+//---------------------------------------------------------------------------------------------
 
     //Topological sort: It is only possible for directed acyclic graph.
     // doTopologicalSortDFS(n, visited, dirAdj);
@@ -330,6 +338,7 @@ int main(){
     //BFS topological sort is also known as kahn's algo.
     // doTopologicalSortBFS(n, dirAdj); 
 
+//------------------------------------------------------------------------------------------------
 
 }                             
 //Sample input with cycle:  
