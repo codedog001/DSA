@@ -300,7 +300,9 @@ int main(){
 
     //Topological sort: It is only possible for directed acyclic graph.
     // doTopologicalSortDFS(n, visited, dirAdj);
-    topologicalSortBFS(n, dirAdj);
+
+    //BFS topological sort is also known as kahn's algo.
+    topologicalSortBFS(n, dirAdj); 
 
 }                             
 //Sample input with cycle:  
