@@ -1,3 +1,5 @@
 Important Topics:
 1. Topological Sort - Specially using BFS
 2. Check whether graph is bipartite or not? - Uses Graph coloring
+3. Shortes Path in Directed acyclic weighted graph uses topo Sort
+4. Detect cycle in directed graph through BFS uses topo sort
