@@ -279,6 +279,59 @@ void findShortestPathInDAWG(int source, vector<pair<int, int>> dirWtdAdj[], int 
 }
 
 
+void findShortestPathInUWG(int n, int source, vector<pair<int, int>> adj[]){
+    //Create minHeap to store {distance, node} pair.
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+
+    //Create distance array.
+    vector<int> distance(n+1, INT_MAX);
+
+    //Assign distance[source] = 0.
+    distance[source] = 0;
+
+    //Push source node to minHeap
+    minHeap.push({0, source});
+
+    //Find minimum distance to all nodes from source node.
+    while(!minHeap.empty()){
+        pair<int, int> p = minHeap.top();
+        minHeap.pop();
+        int node = p.second;
+        int distToThisNode = p.first;
+
+        vector<pair<int, int>> t = adj[node];
+        for(pair<int, int> c: t){
+            int neighbor = c.first;
+            int pathWeight = c.second;
+
+            int distanceFromNode = distToThisNode + pathWeight;
+            int previousDistance = distance[neighbor];
+
+            if(distanceFromNode < previousDistance){
+                distance[neighbor] = distanceFromNode;
+                minHeap.push({distanceFromNode, neighbor});
+            }
+        }
+    }
+
+    //Print the result
+    cout << endl << endl;
+    cout << "Shortest Distance from " << source << " to all nodes in Undirected Weighted Graph using Dijkstra: " << endl;
+    for(int i = 0; i<=n; i++){
+        cout << source << " to " << i << " : " << distance[i] << endl;
+    }
+
+}
+
+void inputUndirectedWeightedGraph(vector<pair<int, int>> adj[], int e){
+    for(int i=0; i<e; i++){
+        int u, v, w;
+        cin >> u >> v >> w;
+        adj[u].push_back({v,w});
+        adj[v].push_back({u,w});
+    }
+}
+
 
 int main(){
     int n, e;
@@ -435,8 +488,8 @@ int main(){
     //nodes, and assing minimum(current cost, old cost).
     //5. By the end, array will have minimum cost from source to all nodes.
 
-    vector<pair<int, int>> dirAcyclicWtdAdj[n+1];
-    inputDirectedAcyclicWeightedGraph(dirAcyclicWtdAdj, e);
+    // vector<pair<int, int>> dirAcyclicWtdAdj[n+1];
+    // inputDirectedAcyclicWeightedGraph(dirAcyclicWtdAdj, e);
 
     // cout << "OUTPUT: " << endl;
     // for(int i=0; i<=n; i++){
@@ -447,10 +500,23 @@ int main(){
     //     }
     // }
 
-    int source = 0;
-    findShortestPathInDAWG(source, dirAcyclicWtdAdj, n, visited);
+    // int source = 0;
+    // findShortestPathInDAWG(source, dirAcyclicWtdAdj, n, visited);
 
 // ----------------------------------------------------------------------------------------------------------------
+    
+    //Dijkstra's Algorithm
+    //Shortest path from source to destination in undirected weighted graph
+    //1. Create adj list
+     
+    vector<pair<int, int>> undirWtdAdj[n+1];
+    inputUndirectedWeightedGraph(undirWtdAdj, e);
+
+    int source = 1;
+    findShortestPathInUWG(n, source, undirWtdAdj);
+
+// ----------------------------------------------------------------------------------------------------------------
+
 
 
 }                             
@@ -504,4 +570,15 @@ int main(){
 4 2 2 
 4 5 4
 5 3 1
+*/
+
+//Undirected Weighted Graph
+/*
+5 6
+1 2 2
+2 3 4
+3 4 3
+1 4 1
+2 5 5
+3 5 1
 */
