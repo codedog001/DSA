@@ -332,6 +332,59 @@ void inputUndirectedWeightedGraph(vector<pair<int, int>> adj[], int e){
     }
 }
 
+void findMSTUsingPrims(vector<pair<int, int>> udirWtdAdj[], int e, int n){
+    //1. Create visited, weight and parent array, and a priority queue to quickly pick up next node
+    //having miniumum weight.
+    //Storage in priority queue: {weight, node}
+    //Storage in adj list: {node, weight}
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+    vector<int> visited(n+1, 0);
+    vector<int> weight(n+1, INT_MAX);
+    vector<int> parent(n+1, -1);
+
+    //2. Assume source as 0 initially.
+    weight[0] = 0;
+    parent[0] = -1; 
+    minHeap.push({0,0});
+
+    while(!minHeap.empty()){
+        //3. Visit neighbors (BFS) of current node and assign them current edge weight if(curEdgeWt < weight[neighbor])
+        pair<int, int> p = minHeap.top();
+        minHeap.pop();
+        int node = p.second;
+        int nodeWeight = p.first;
+
+        vector<pair<int, int>> t = udirWtdAdj[node];
+        for(pair<int, int> d: t){
+            int neighbor = d.first;
+            int newEdgeWeight = d.second;
+            int oldWeight = weight[neighbor];
+
+            //4. Remember: Visit only unvisited neighbors
+            if(visited[neighbor] == 0 && newEdgeWeight < oldWeight){
+                //5. Update parent, weight and push this node into minHeap.
+                parent[neighbor] = node;
+                weight[neighbor] = newEdgeWeight;
+                minHeap.push({newEdgeWeight, neighbor});
+            }
+        }
+
+        //5. Mark current node as visited
+        visited[node] = 1;
+    }
+
+    //Now, parent contains, parent of all nodes in MST, and weight contains the minimum edge weight required to connect to the node.
+    //Therefore, print the result
+    int totalWeight = 0;
+    for(int i=0; i<=n; i++){
+        cout << "Parent of node " <<  i << " is " << parent[i] << " having weight " << weight[i] << endl; 
+        totalWeight += weight[i];
+    }
+
+    cout << endl << "Total Weight is: " << totalWeight <<endl;
+}
+
 
 int main(){
     int n, e;
@@ -468,7 +521,7 @@ int main(){
     //Topological sort: It is only possible for directed acyclic graph.
     // doTopologicalSortDFS(n, visited, dirAdj);
 
-    //BFS topological sort is also known as kahn's algo.
+    //kahn's algo: BFS topological sort.
     // doTopologicalSortBFS(n, dirAdj); 
 
 //------------------------------------------------------------------------------------------------
@@ -505,18 +558,32 @@ int main(){
 
 // ----------------------------------------------------------------------------------------------------------------
     
-    //Dijkstra's Algorithm
-    //Shortest path from source to destination in undirected weighted graph
-    //1. Create adj list
+    //Dijkstra's Algorithm: Shortest path from source to destination in undirected weighted graph.
+    //1. Create adj list.
+    //2. Create minHeap to store {distance, node} pair.
+    //3. Create distance array.
+    //4. Assign distance[source] = 0.
+    //5. Push {0,source} node to minHeap.
+    //6. Find minimum distance to all nodes from source node.
+    //7. Print result.
      
-    vector<pair<int, int>> undirWtdAdj[n+1];
-    inputUndirectedWeightedGraph(undirWtdAdj, e);
+    // vector<pair<int, int>> undirWtdAdj[n+1];
+    // inputUndirectedWeightedGraph(undirWtdAdj, e);
 
-    int source = 1;
-    findShortestPathInUWG(n, source, undirWtdAdj);
+    // int source = 1;
+    // findShortestPathInUWG(n, source, undirWtdAdj);
 
 // ----------------------------------------------------------------------------------------------------------------
 
+    //Prims Algorithm to find MST of given undirected connected graph
+    //1. Create adj list.
+    //2. Other steps described in function
+    vector<pair<int, int>> undirWtdAdj[n+1];
+    inputUndirectedWeightedGraph(undirWtdAdj, e);
+
+    findMSTUsingPrims(undirWtdAdj, e, n);
+
+// ----------------------------------------------------------------------------------------------------------------
 
 
 }                             
@@ -581,4 +648,15 @@ int main(){
 1 4 1
 2 5 5
 3 5 1
+*/
+
+//Undirected Weighted Graph (used in Prims)
+/*
+4 6
+0 1 2
+1 2 3
+0 3 6
+1 4 5
+1 3 8 
+2 4 7
 */

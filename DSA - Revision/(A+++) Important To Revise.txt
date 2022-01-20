@@ -1,13 +1,13 @@
 Important Topics: A+++
 
 1st. Graph:
-1. Topological Sort - Specially using BFS
+1. Kahn's Algo (BFS Topological Sort)
 2. Check whether graph is bipartite or not? - Uses Graph coloring
 3. Shortes Path in Directed acyclic weighted graph uses topo Sort
 4. Detect cycle in directed graph through BFS uses topo sort
 
 ---------------------------------------------------------------------------------
 
-2nd. Binary Search
+2nd. Binary Search:
 1. Koko Eating bananas - Leetcode Medium
 2. Batteries Needed - Leetcode Hard
