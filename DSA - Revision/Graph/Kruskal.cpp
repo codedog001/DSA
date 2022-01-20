@@ -56,9 +56,6 @@ int main(){
     //2. Sort in increasing order of weight.
     sort(edges.begin(), edges.end(), comp);
 
-    for(auto& e:edges){
-        cout << "Node " << e.u << " is connected to " << e.v << ".Edge Weight: " << e.w << endl;
-    }
 
     //3. Create parent vector
     vector<int> parent(n,0);
@@ -79,20 +76,18 @@ int main(){
         int parU = findParent(u, parent);
         int parV = findParent(v, parent);
         
-        
-
         if(parU != parV){
             result.push_back(Node(u, v, curEdge.w));
-            cout << "Found: " << u << " and " << v << endl;
             //Union operation makes parents of both nodes same
-            unionParents(u, v, parent, rank);
-            cout << "u: " << u << " Pu: "  << parent[u] << endl;
-            cout << "v: " << v << " Pv: "  << parent[v] << endl;
+            unionParents(parU, parV, parent, rank);
         }
     }
     //Print result
+    int totalWeight = 0;
     for(auto& e:result){
         cout << "Node " << e.u << " is connected to " << e.v << ". Edge Weight: " << e.w << endl;
+        totalWeight += e.w;
     }
+    cout << "Total Weight is: " << totalWeight << endl;
 
 }
