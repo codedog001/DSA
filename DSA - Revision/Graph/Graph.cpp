@@ -378,7 +378,7 @@ void findMSTUsingPrims(vector<pair<int, int>> udirWtdAdj[], int e, int n){
     //Therefore, print the result
     int totalWeight = 0;
     for(int i=0; i<=n; i++){
-        cout << "Parent of node " <<  i << " is " << parent[i] << " having weight " << weight[i] << endl; 
+        cout << "Parent of node " <<  i << " is " << parent[i] << ". Edge weight: " << weight[i] << endl; 
         totalWeight += weight[i];
     }
 
