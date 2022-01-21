@@ -756,11 +756,19 @@ int main(){
     //2. Transpose the given graph.
     //3. Pop out each node from stack one by one and DFS on it on transposed graph.
 
-    vector<int> dirAdj[n+1];
-    inputDirAdjList(dirAdj, e);
+    // vector<int> dirAdj[n+1];
+    // inputDirAdjList(dirAdj, e);
 
-    findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
+    // findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
 
+// -----------------------------------------------------------------------------------------------------------------
+
+    //Bellman Ford Algorithm 
+    //Find path from source to all nodes in directed graph.
+    //Works with negative weight, can't work with cycles having negative weight, but can detect such cycles.
+    //Dijkstra might give incorrect result when negative weights, so can't be trusted.
+
+    //Code inside bellman_ford.cpp
 
 }                             
 //Undirected graph with cycle:  
