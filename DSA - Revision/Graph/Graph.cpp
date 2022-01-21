@@ -440,6 +440,58 @@ void findBridges(int n, vector<int> undirAdj[]){
     }
 }
 
+void dfsToFindArticulationPoints(int curNode, int parent, vector<int>& visited, vector<int> undirAdj[], int timer, vector<int>& lowTime, vector<int>& inTime, unordered_set<int>& result){
+    visited[curNode] = 1;
+    inTime[curNode] = lowTime[curNode] = timer;
+
+    vector<int> t = undirAdj[curNode];
+    for(auto& num:t){
+        if(num == parent) continue;
+        else if(visited[num] == 1){
+            //Back edge
+            lowTime[curNode] = min(lowTime[curNode], inTime[num]);
+        }
+        else if(visited[num] == 0){
+            //Forward Edge
+            //1. Call DFS
+            timer+= 1;
+            dfsToFindArticulationPoints(num, curNode, visited, undirAdj, timer, lowTime, inTime, result);
+
+            //2. CurNode will update its lowTime if it could be reduced, if it could 
+            //be reduced that means child could reach an ancestor and therefore curNode could
+            //also reach that ancestor
+            lowTime[curNode] = min(lowTime[curNode], lowTime[num]);
+
+            
+            //3. Check if this edge with the neighbor is a bridge
+            if(lowTime[num] >= inTime[curNode] && parent != -1){
+                result.insert(curNode);
+            }
+        }
+
+        //Check if root is an articulation point
+        if(parent == -1 && t.size() > 1) result.insert(curNode);
+    }
+}
+
+void findArticulationPoints(int n, vector<int> undirAdj[]){
+    vector<int> visited(n+1, 0);
+    static int timer = 1;
+    vector<int> lowTime(n+1, 0);
+    vector<int> inTime(n+1, 0);
+    unordered_set<int> result;
+    for(int i=1; i<=n; i++){
+        if(visited[i] == 0){
+            dfsToFindArticulationPoints(i, -1, visited, undirAdj, timer, lowTime, inTime, result);
+        }
+    }
+
+    //Print Result
+    for(auto& p:result){
+        cout << "Node: " << p << " is an articulation point." << endl;
+    }
+}
+
 
 int main(){
     int n, e;
@@ -639,10 +691,18 @@ int main(){
 // ----------------------------------------------------------------------------------------------------------------
 
     //Find Bridges in graph
+    // vector<int> undirAdj[n+1];
+    // inputUndirAdj(e, undirAdj);
+
+    // findBridges(n, undirAdj);
+
+// ----------------------------------------------------------------------------------------------------------------
+
+    //Find Articulation Points in graph
     vector<int> undirAdj[n+1];
     inputUndirAdj(e, undirAdj);
 
-    findBridges(n, undirAdj);
+    findArticulationPoints(n, undirAdj);
 
 
 }                             
