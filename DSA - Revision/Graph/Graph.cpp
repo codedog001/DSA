@@ -115,6 +115,14 @@ void dfs(int i, vector<int>& visited, vector<int> adj[]){
     }
 }
 
+void doDFS(vector<int> adj[], int n){
+    vector<int> visited(n+1, 0);
+    for(int i=1; i<=n; i++){
+        if(visited[i] == 0) {
+            dfs(i, visited, adj);
+        }
+    }
+}
 
 void bfs(int i, vector<int>& visited, vector<int> adj[]){
     queue<int> q;
@@ -143,11 +151,11 @@ void doTopologicalSortDFS(int n, vector<int>& visited, vector<int> dirAdj[], sta
     }
 
     //Print result of sorting
-    cout << "Topological Sort Result: " << endl;
-    while(!st.empty()){
-        cout << st.top()<< " ";
-        st.pop();
-    }
+    // cout << "Topological Sort Result: " << endl;
+    // while(!st.empty()){
+    //     cout << st.top()<< " ";
+    //     st.pop();
+    // }
 }
 
 void topologicalSortBFS(int n, vector<int> dirAdj[], vector<int>& res){
@@ -492,6 +500,47 @@ void findArticulationPoints(int n, vector<int> undirAdj[]){
     }
 }
 
+void inputDirAdjList(vector<int> dirAdj[], int e){
+    for(int i=0; i<e; i++){
+        int u, v;
+        cin >> u >> v;
+        dirAdj[u].push_back(v);
+    }
+}
+
+void findStronglyConnectedComponentUsingKosaraju(int n, vector<int> dirAdj[]){
+    stack<int> st;
+    vector<int> visited(n+1, 0);
+
+    //1. Find result of topo sort
+    doTopologicalSortDFS(n, visited, dirAdj, st);
+
+    //2. Transpose given graph
+    //E.g: 1->2->3<-4 => 1<-2<-3->4
+    vector<int> transposeAdj[n+1];
+
+    for(int i=1; i<=n; i++){
+        vector<int> t = dirAdj[i];
+
+        //We will do dfs again, so assign 0 in visited.
+        visited[i] = 0;
+        for(auto& num:t){
+            transposeAdj[num].push_back(i);
+        }
+    }
+
+    cout << "Strongly Connected Components are: " << endl;
+    //3. Pop out nodes 1 by 1 from result of topo sort and apply dfs on them on transposed graph.
+    while(!st.empty()){
+        int node = st.top();
+        st.pop();
+        if(visited[node] == 0) {
+            dfs(node, visited, transposeAdj);
+            cout << endl;
+        }
+    }
+    cout << endl;
+}   
 
 int main(){
     int n, e;
@@ -524,11 +573,8 @@ int main(){
     //     }
     // }
     // cout << "DFS Traversal" << endl;
-    // for(int i=1; i<=n; i++){
-    //     if(visited[i] == 0) {
-    //         dfs(i, visited, adj);
-    //     }
-    // }
+    // doDFS(adj, n);
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -589,17 +635,8 @@ int main(){
 
     // if(flag) cout << "It is a bipartite graph." << endl;
 
-//--------------------------------------------------------------------------------------------------
 
-    //Create directed adjacency list
-    // vector<int> dirAdj[n+1];
-    // for(int i=0; i<e; i++){
-    //     int u, v;
-    //     cin >> u >> v;
-    //     dirAdj[u].push_back(v);
-    // }
-
-// ----------------------------------------------------------------------------------------------
+//  --------------------------------------------------------------------------------------------
 
     //Detect cycle in directed graph
     //0. Using BFS (Kahn's algo): It is done by topological sort, if o.p of topological sort < n -> graph contains cycle.
@@ -608,6 +645,12 @@ int main(){
     //1. using DFS
     //It uses one more visited array other than normal visited array to keep track of nodes traversed in current DFS call.
     // vector<int> currentCallVisited(n+1, 0);
+    
+    //Create directed adjacency list
+    // vector<int> dirAdj[n+1];
+    // inputDirAdjList(dirAdj, e);
+
+
     // bool flag = false;
     // for(int i=1; i<=n; i++){
     //     if(directedGraphHasCycleDFS(i, visited, currentCallVisited, dirAdj)){
@@ -699,10 +742,24 @@ int main(){
 // ----------------------------------------------------------------------------------------------------------------
 
     //Find Articulation Points in graph
-    vector<int> undirAdj[n+1];
-    inputUndirAdj(e, undirAdj);
+    // vector<int> undirAdj[n+1];
+    // inputUndirAdj(e, undirAdj);
 
-    findArticulationPoints(n, undirAdj);
+    // findArticulationPoints(n, undirAdj);
+
+// -----------------------------------------------------------------------------------------------------------------
+
+    //Kosaraju's Algo: Find strongly conneected components in directed graph
+    //Steps:
+    //1. Find topo sort - Can't be called topo sort because topo sort works for Directed acyclic graph
+    //But, the result needed is same as result of topo sort, so called topo sort.
+    //2. Transpose the given graph.
+    //3. Pop out each node from stack one by one and DFS on it on transposed graph.
+
+    vector<int> dirAdj[n+1];
+    inputDirAdjList(dirAdj, e);
+
+    findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
 
 
 }                             
