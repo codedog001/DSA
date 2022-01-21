@@ -385,20 +385,70 @@ void findMSTUsingPrims(vector<pair<int, int>> udirWtdAdj[], int e, int n){
     cout << endl << "Total Weight is: " << totalWeight <<endl;
 }
 
+void inputUndirAdj(int e, vector<int> undirAdj[]){
+    for(int i=0; i<e; i++){
+        int u, v;
+        cin >> u>> v;
+        undirAdj[u].push_back(v);
+        undirAdj[v].push_back(u);
+    }
+}
+
+void dfsToFindBridges(int curNode, int parent, vector<int>& visited, vector<int> undirAdj[], int timer, vector<int>& lowTime, vector<int>& inTime, vector<pair<int, int>>& result){
+    visited[curNode] = 1;
+    inTime[curNode] = lowTime[curNode] = timer;
+
+    vector<int> t = undirAdj[curNode];
+    for(auto& num:t){
+        if(num == parent) continue;
+        else if(visited[num] == 1){
+            //Back edge
+            lowTime[curNode] = min(lowTime[curNode], inTime[num]);
+        }
+        else if(visited[num] == 0){
+            //Forward Edge
+            //1. Call DFS
+            timer+= 1;
+            dfsToFindBridges(num, curNode, visited, undirAdj, timer, lowTime, inTime, result);
+
+            //2. Check if this edge with the neighbor is a bridge
+            if(inTime[curNode] < lowTime[num]){
+                result.push_back({curNode, num});
+            }
+
+            //3. CurNode will update its lowTime if it could be reduced
+            lowTime[curNode] = min(lowTime[curNode], lowTime[num]);
+        }
+    }
+}
+
+void findBridges(int n, vector<int> undirAdj[]){
+    vector<int> visited(n+1, 0);
+    static int timer = 1;
+    vector<int> lowTime(n+1, 0);
+    vector<int> inTime(n+1, 0);
+    vector<pair<int, int>> result;
+    for(int i=1; i<=n; i++){
+        if(visited[i] == 0){
+            dfsToFindBridges(i, -1, visited, undirAdj, timer, lowTime, inTime, result);
+        }
+    }
+
+    //Print Result
+    for(auto& p:result){
+        cout << "Edge: " << p.first << " - " << p.second << " is a bridge" << endl;
+    }
+}
+
 
 int main(){
     int n, e;
     cin >> n >> e;
 
     //Create undirected adjacency list
-    vector<int> undirAdj[n+1];
+    // vector<int> undirAdj[n+1];
+    // inputUndirAdj(e, undirAdj);
     
-    // for(int i=0; i<e; i++){
-    //     int u, v;
-    //     cin >> u>> v;
-    //     undirAdj[u].push_back(v);
-    //     undirAdj[v].push_back(u);
-    // }
 
     
 
@@ -578,12 +628,21 @@ int main(){
     //Prims Algorithm to find MST of given undirected connected graph
     //1. Create adj list.
     //2. Other steps described in function
-    vector<pair<int, int>> undirWtdAdj[n+1];
-    inputUndirectedWeightedGraph(undirWtdAdj, e);
+    // vector<pair<int, int>> undirWtdAdj[n+1];
+    // inputUndirectedWeightedGraph(undirWtdAdj, e);
 
-    findMSTUsingPrims(undirWtdAdj, e, n);
+    // findMSTUsingPrims(undirWtdAdj, e, n);
 
 // ----------------------------------------------------------------------------------------------------------------
+    //Kruskals algorithm in kruskal.cpp
+
+// ----------------------------------------------------------------------------------------------------------------
+
+    //Find Bridges in graph
+    vector<int> undirAdj[n+1];
+    inputUndirAdj(e, undirAdj);
+
+    findBridges(n, undirAdj);
 
 
 }                             
