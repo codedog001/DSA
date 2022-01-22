@@ -764,6 +764,7 @@ int main(){
 // -----------------------------------------------------------------------------------------------------------------
 
     //Bellman Ford Algorithm 
+    //T.C - O(e*(n-1)) => O(n^3) in worst case => Worst Case: connected graph where e = (n(n-1))/2.
     //Find path from source to all nodes in directed graph.
     //Works with negative weight, can't work with cycles having negative weight, but can detect such cycles.
     //Dijkstra might give incorrect result when negative weights, so can't be trusted.
