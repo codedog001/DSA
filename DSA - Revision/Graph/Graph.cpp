@@ -703,7 +703,7 @@ int main(){
 
 // ----------------------------------------------------------------------------------------------------------------
     
-    //Dijkstra's Algorithm: Shortest path from source to destination in undirected weighted graph.
+    //Dijkstra's Algorithm: Shortest path from source to all nodes in directed/undirected weighted graph.
     //1. Create adj list.
     //2. Create minHeap to store {distance, node} pair.
     //3. Create distance array.
@@ -716,7 +716,7 @@ int main(){
     // inputUndirectedWeightedGraph(undirWtdAdj, e);
 
     // int source = 1;
-    // findShortestPathInUWG(n, source, undirWtdAdj);
+    findShortestPathInUWG(n, source, undirWtdAdj);
 
 // ----------------------------------------------------------------------------------------------------------------
 
