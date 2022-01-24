@@ -6,6 +6,9 @@ Important Topics: A+++
 2. Check whether graph is bipartite or not? - Uses Graph coloring
 3. Shortes Path in Directed acyclic weighted graph uses topo Sort
 4. Detect cycle in directed graph through BFS uses topo sort
+5. T.C of union find with and without path compression, and creating class of DSU- 
+https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution-w-Explanation-or-All-Possible-Approaches-with-comments
+
 
 ---------------------------------------------------------------------------------
 
