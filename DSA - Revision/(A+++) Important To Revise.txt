@@ -9,6 +9,7 @@ Important Topics: A+++
 5. T.C of union find with and without path compression, and creating class of DSU- 
 https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution-w-Explanation-or-All-Possible-Approaches-with-comments
 
+6. Evaluate Division - Leetcode Medium (Very Hard)
 
 ---------------------------------------------------------------------------------
 
