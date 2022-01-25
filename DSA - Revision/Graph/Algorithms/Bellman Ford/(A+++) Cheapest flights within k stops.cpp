@@ -1,22 +1,22 @@
-// 1. Dijkstra Variation:
-// Note: This problem can't be solved through Dijkstra without modification. Dijkstra will only revisit path with miniumum weight, but that's not sufficient, we also need to revisit node having higher weight but lesser stops.
+1. Dijkstra Variation:
+Note: This problem can't be solved through Dijkstra without modification. Dijkstra will only revisit path with miniumum weight, but that's not sufficient, we also need to revisit node having higher weight but lesser stops.
 
-// For E.g:
-// 5
-// [[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]]
-// 0
-// 2
-// 2
+For E.g:
+5
+[[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]]
+0
+2
+2
 
-// Dijkstra will assign node 1 weight 4: 0 -> 3 -> 1. Then it will travel node to node 2: 0 -> 3 -> 1 -> 2 giving weight 9.
-// As soon as we change weight of 1 from 5 to 4 and add a stop through normal Dijkstra, we can't reach correct solution,
-// which is to reach node 2 through 0 -> 1 -> 4 -> 2 with weight 7.
-// Sum Up: Hence we need to modify Dijkstra, to consider 2nd path 0->1 even if node 1 has weight 5, but has only 1 stop unlike 1st path where node 1 takes 2 stops.
+Dijkstra will assign node 1 weight 4: 0 -> 3 -> 1. Then it will travel node to node 2: 0 -> 3 -> 1 -> 2 giving weight 9.
+As soon as we change weight of 1 from 5 to 4 and add a stop through normal Dijkstra, we can't reach correct solution,
+which is to reach node 2 through 0 -> 1 -> 4 -> 2 with weight 7.
+Sum Up: Hence we need to modify Dijkstra, to consider 2nd path 0->1 even if node 1 has weight 5, but has only 1 stop unlike 1st path where node 1 takes 2 stops.
 
-// Below is the code applying same thing, a dry run on above example will improve understanding of this method.
-// T.C - O(v + elogv)
+Below is the code applying same thing, a dry run on above example will improve understanding of this method.
+T.C - O(v + elogv)
 
-// I have attached the link to tutorial at the end of solution, it helped me understand the solution, so if my explanation doesn't help, you can watch that tutorial.
+I have attached the link to tutorial at the end of solution, it helped me understand the solution, so if my explanation doesn't help, you can watch that tutorial.
 
 #define tii tuple<int, int, int>
 #define pii pair<int, int>
@@ -68,11 +68,10 @@ public:
         return -1;
     }
 };
+2. Bellman Ford Variation:
+This problem can be solved using Bellman Ford algorithm by performing k+1 relaxations, that's it, if after k+1 relaxations price is not INT_MAX, then return price otherwise return -1.
 
-// 2. Bellman Ford Variation:
-// This problem can be solved using Bellman Ford algorithm by performing k+1 relaxations, that's it, if after k+1 relaxations price is not INT_MAX, then return price otherwise return -1.
-
-// Link to tutorial is attached at the end of solution.
+Link to tutorial is attached at the end of solution.
 
 class Solution {
 public:

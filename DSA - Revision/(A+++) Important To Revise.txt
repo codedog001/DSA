@@ -10,7 +10,7 @@ Important Topics: A+++
 https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution-w-Explanation-or-All-Possible-Approaches-with-comments
 
 6. Evaluate Division - Leetcode Medium (Very Hard)
-
+7. Cheapest Flights within k stops - Must revise this once with Dijkstra variation
 ---------------------------------------------------------------------------------
 
 2nd. Binary Search:
