@@ -1,3 +1,4 @@
+//Explanation of T.C, S.C: https://leetcode.com/problems/all-paths-from-source-to-target/discuss/1599683/C%2B%2BPython-Simple-Solution-w-Explanation-or-BFS-and-DFS-Traversals
 1. DFS: 
 // T.C: O(N*2^N)
 // S.C: O(N)

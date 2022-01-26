@@ -716,7 +716,7 @@ int main(){
     // inputUndirectedWeightedGraph(undirWtdAdj, e);
 
     // int source = 1;
-    findShortestPathInUWG(n, source, undirWtdAdj);
+    // findShortestPathInUWG(n, source, undirWtdAdj);
 
 // ----------------------------------------------------------------------------------------------------------------
 
@@ -756,10 +756,10 @@ int main(){
     //2. Transpose the given graph.
     //3. Pop out each node from stack one by one and DFS on it on transposed graph.
 
-    // vector<int> dirAdj[n+1];
-    // inputDirAdjList(dirAdj, e);
+    vector<int> dirAdj[n+1];
+    inputDirAdjList(dirAdj, e);
 
-    // findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
+    findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -845,3 +845,12 @@ int main(){
 1 3 8 
 2 4 7
 */
+
+// 7 7
+// 1 2
+// 1 3
+// 2 3 
+// 2 4
+// 3 6
+// 4 1
+// 5 6
