@@ -30,19 +30,18 @@ bool directedGraphHasCycleDFS(int i, vector<int>& visited, vector<int>& currentC
 
 
 
-bool checkBipartiteDFS(int i, vector<int>& color, vector<int>& visited, vector<int> adj[]){
-    visited[i] = 1;
-    if(color[i] == -1) color[i] = 1;
-    vector<int> t = adj[i];
-    for(auto& num:t){
-        if(visited[num] == 0){
-            color[num] = 1-color[i];
-            if(!checkBipartiteDFS(num, color, visited, adj)) return false;
+bool checkBipartiteDFS(int i, vector<int>& color, vector<int> adj[]){
+    if(color[node] == -1) color[node] = 1;
+        
+        vector<int> neighbors = adjList[node];
+        for(auto& neighbor: neighbors){
+            if(color[neighbor] == -1){ //If neighbor is not visited yet
+                color[neighbor] = 1 - color[node];
+                if(!isGraphBipartite(neighbor, adjList)) return false;
+            }
+            else if(color[neighbor] != -1 && color[neighbor] == color[node]) return false;
         }
-        else if(visited[num] == 1 && color[num] == color[i]) return false;
-    }
-
-    return true;
+        return true;
 }
 
 
@@ -625,7 +624,7 @@ int main(){
     // vector<int> color(n+1, -1);
     // for(int i=1; i<=n; i++){
     //     if(visited[i] == 0){
-    //         if(!checkBipartiteDFS(i, color, visited, undirAdj)){
+    //         if(!checkBipartiteDFS(i, color, undirAdj)){
     //             cout << "Not a bipartite graph." << endl;
     //             flag = false;
     //             break;
