@@ -12,6 +12,10 @@ https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution
 6. Evaluate Division - Leetcode Medium (Very Hard)
 7. Cheapest Flights within k stops - Must revise this once with Dijkstra variation
 8. Find all paths in DAG from source to taret - Leetcode Medium - BFS is unituitive without revision.
+9. Find eventual safe nodes - Leetcode Medium - Must revise.
+
+
+
 ---------------------------------------------------------------------------------
 
 2nd. Binary Search:

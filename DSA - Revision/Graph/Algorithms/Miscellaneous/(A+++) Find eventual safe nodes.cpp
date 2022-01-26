@@ -1,5 +1,7 @@
 A dry run of solution below on pen & paper would make the solution easier to understand.
 This is not kosaraju's opposite, if a node not involved in strongly connected component leads to a strongly connected component then also it is not a safe node, but according to kosaraju that node will be an individual strongly connected component, hence it is not opposite of kosaraju.
+
+1. Transpose and remove terminal Nodes:
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
@@ -45,5 +47,46 @@ public:
         }
         sort(result.begin(), result.end());
         return result;
+    }
+};
+
+2. DFS:
+
+#define vvi vector<vector<int>>
+#define usi unordered_set<int>
+
+class Solution {
+public:
+    usi cycleNodes, safeNodes;
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> result, visited(n,0);
+        
+        for(int i=0; i<n; i++){
+            if(dfs(i,graph, visited)) result.push_back(i);
+        }
+        return result;
+    }
+    
+    bool dfs(int node, vvi& graph, vector<int>& visited){
+        if(safeNodes.find(node) != safeNodes.end()) return true;
+        if(cycleNodes.find(node) != cycleNodes.end()) return false;
+        
+        if(visited[node] == 1){
+            cycleNodes.insert(node);
+            return false;
+        }
+        visited[node] = 1;
+        vector<int> neighbors = graph[node];
+        
+        for(auto& neighbor: neighbors){
+            if(!dfs(neighbor, graph, visited)) {
+                cycleNodes.insert(node);
+                return false;
+            }
+        }
+        visited[node] = 0;
+        safeNodes.insert(node);
+        return true;
     }
 };
