@@ -30,14 +30,14 @@ bool directedGraphHasCycleDFS(int i, vector<int>& visited, vector<int>& currentC
 
 
 
-bool checkBipartiteDFS(int i, vector<int>& color, vector<int> adj[]){
+bool checkBipartiteDFS(int node, vector<int>& color, vector<int> adj[]){
     if(color[node] == -1) color[node] = 1;
         
-        vector<int> neighbors = adjList[node];
+        vector<int> neighbors = adj[node];
         for(auto& neighbor: neighbors){
             if(color[neighbor] == -1){ //If neighbor is not visited yet
                 color[neighbor] = 1 - color[node];
-                if(!isGraphBipartite(neighbor, adjList)) return false;
+                if(!checkBipartiteDFS(neighbor, color, adj)) return false;
             }
             else if(color[neighbor] != -1 && color[neighbor] == color[node]) return false;
         }
@@ -541,6 +541,19 @@ void findStronglyConnectedComponentUsingKosaraju(int n, vector<int> dirAdj[]){
     cout << endl;
 }   
 
+
+void floydWarshall(int n, vector<vector<int>>& graph){
+    int inf = 10000000;
+    for(int k=1; k<=n; k++){
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=n; j++){
+                if(graph[i][j] != inf && graph[i][k] != inf) graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j]);
+            }
+        }
+    }
+}
+
+
 int main(){
     int n, e;
     cin >> n >> e;
@@ -755,10 +768,10 @@ int main(){
     //2. Transpose the given graph.
     //3. Pop out each node from stack one by one and DFS on it on transposed graph.
 
-    vector<int> dirAdj[n+1];
-    inputDirAdjList(dirAdj, e);
+    // vector<int> dirAdj[n+1];
+    // inputDirAdjList(dirAdj, e);
 
-    findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
+    // findStronglyConnectedComponentUsingKosaraju(n, dirAdj);
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -769,6 +782,42 @@ int main(){
     //Dijkstra might give incorrect result when negative weights, so can't be trusted.
 
     //Code inside bellman_ford.cpp
+
+// -----------------------------------------------------------------------------------------------------------------
+
+    //Floyd warshall algo - T.C: O(n^3) -> n: No. of nodes
+
+
+    //Take input of weighted graph
+    vector<vector<int>> graph(n+1, vector<int>(n+1,0));
+    int inf = 10000000;
+
+    for(int i=0; i<=n; i++){
+        for(int j=0; j<=n; j++){
+            if(i==j) graph[i][j] = 0;
+            else graph[i][j] = inf;
+        }
+    }
+    for(int i=0; i<e; i++){
+        int x, y, wt;
+        cin >> x >> y >> wt;
+        graph[x][y] = wt;
+    }
+
+    floydWarshall(n, graph);
+
+    //Print graph
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=n; j++){
+            if(graph[i][j] == inf) cout << "I" << " ";
+            else cout << graph[i][j] << " ";
+        }
+        cout << endl;
+
+    }
+
+
+
 
 }                             
 //Undirected graph with cycle:  
