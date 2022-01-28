@@ -14,8 +14,8 @@ https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution
 8. Find all paths in DAG from source to taret - Leetcode Medium - BFS is unituitive without revision.
 9. Find eventual safe nodes - Leetcode Medium - Must revise.
 10. Read Votrubac's solution to problem region cut by slashes, it has a peculiar implementation.
-11. Flower planting with no adjacent - Simple greedy solution - Looks like graph coloring
-
+11. Flower planting with no adjacent - Simple greedy solution but looks like graph coloring
+12 Reorder Routes to Make All Paths Lead to the City Zero - Very different - Track direction of nodes
 
 ---------------------------------------------------------------------------------
 
