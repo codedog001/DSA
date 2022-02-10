@@ -1,6 +1,7 @@
 vector<int> color;
 bool isValid(int k, int node, bool graph[101][101], int n){
-    for(int i=0; i<n; i++){
+    for(int i=0; i<n; i++){ 
+        //TODO: Why k!=node condition?
         if(k != node && graph[node][i] == true && color[i] == k) return false;
     }
     return true;

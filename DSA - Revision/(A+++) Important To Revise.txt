@@ -17,8 +17,10 @@ https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution
 11. Flower planting with no adjacent - Simple greedy solution but looks like graph coloring
 12 Reorder Routes to Make All Paths Lead to the City Zero - Very different - Track direction of nodes
 13 M coloring problem - Not DFS but visit nodes sequentially.
----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 2nd. Binary Search:
 1. Koko Eating bananas - Leetcode Medium
 2. Batteries Needed - Leetcode Hard
+3. Find element in rotated sorted Array - First find break point.
