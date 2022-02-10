@@ -16,7 +16,7 @@ https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution
 10. Read Votrubac's solution to problem region cut by slashes, it has a peculiar implementation.
 11. Flower planting with no adjacent - Simple greedy solution but looks like graph coloring
 12 Reorder Routes to Make All Paths Lead to the City Zero - Very different - Track direction of nodes
-
+13 M coloring problem - Not DFS but visit nodes sequentially.
 ---------------------------------------------------------------------------------
 
 2nd. Binary Search:
