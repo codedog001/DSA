@@ -24,3 +24,11 @@ https://leetcode.com/problems/redundant-connection/discuss/1295887/Easy-Solution
 1. Koko Eating bananas - Leetcode Medium
 2. Batteries Needed - Leetcode Hard
 3. Find element in rotated sorted Array - First find break point.
+4. Aggressive cows and minimum no. of pages.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+3rd. Backtracking
+1. Subsets
+2. Permutations
+3. Letter combination of phone no.
